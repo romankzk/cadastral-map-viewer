@@ -1,8 +1,9 @@
 import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { GeoJSON } from 'react-leaflet/GeoJSON'
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import OpacitySlider from "../components/OpacitySlider";
+import SearchFilter from "../components/SearchFilter";
 
 interface OwnerInfo {
     id?: string;
@@ -17,6 +18,8 @@ export default function Map() {
 
     const [owners, setOwners] = useState<OwnerInfo[]>([]);
     const [selectedOwner, setSelectedOwner] = useState<OwnerInfo | null>(null);
+
+    const [searchTerm, setSearchTerm] = useState<string>('');
 
     useEffect(() => {
         fetch('parcels.geojson')
@@ -67,6 +70,17 @@ export default function Map() {
             })
             .catch((err) => console.error(err));
     }, []);
+
+    const filteredOwners = useMemo(() => {
+        const query = searchTerm.toLowerCase().trim();
+        if (!query) return owners;
+
+        return owners.filter(item => {
+            const nameMatches = item.owner.toLowerCase().includes(query);
+            return nameMatches;
+        }
+        );
+    }, [owners, searchTerm]);
 
     const ParcelStyles = {
         Default: {
@@ -182,40 +196,45 @@ export default function Map() {
         <div className="flex flex-row w-full h-screen overflow-hidden">
             <aside className="w-80 h-full bg-slate-50 border-r border-slate-200 p-6 flex flex-col gap-4 z-10 shrink-0 overflow-y-auto">
                 <h2 className="text-lg font-bold text-slate-800">Власники у Ліщоватому</h2>
-
+                <SearchFilter value={searchTerm} onChange={setSearchTerm} />
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
-                    {owners.map((ownerObj) => {
-                        // Check if this specific item is active using the new composite ID
-                        const isSelected = selectedOwner?.id === ownerObj.id;
-                        const primaryHouse = ownerObj.houseNumbers.join(', ');
+                    {filteredOwners.length > 0 ? (
+                        filteredOwners.map((ownerObj) => {
+                            // Check if this specific item is active using the new composite ID
+                            const isSelected = selectedOwner?.id === ownerObj.id;
+                            const primaryHouse = ownerObj.houseNumbers.join(', ');
 
-                        return (
-                            <button
-                                id={`owner-btn-${ownerObj.id}`} // Use ID here instead of raw name
-                                key={ownerObj.id}               // Use ID here to keep React rendering stable
-                                onClick={() => setSelectedOwner(ownerObj)}
-                                className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-150 block ${isSelected
-                                    ? 'bg-blue-600 text-white font-medium shadow-sm'
-                                    : 'text-slate-700 hover:bg-slate-200/60 hover:text-slate-900'
-                                    }`}
-                            >
-                                <div className="flex flex-row justify-between items-center w-full">
-                                    <span className={`text-xs font-bold px-2.5 py-2 rounded ${isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-200/80 text-slate-700'
-                                        }`}>
-                                        {primaryHouse || '—'}
-                                    </span>
-                                    <div className="flex-1 gap-1 text-left">
-                                        <div className="truncate pl-2 font-semibold">
-                                            {ownerObj.owner}
-                                        </div>
-                                        <div className={`text-xs truncate pl-2 ${isSelected ? 'text-white/60' : 'text-slate-500'}`}>
-                                            {ownerObj.locality}
+                            return (
+                                <button
+                                    id={`owner-btn-${ownerObj.id}`}
+                                    key={ownerObj.id}
+                                    onClick={() => setSelectedOwner(ownerObj)}
+                                    className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-150 block ${isSelected
+                                        ? 'bg-blue-600 text-white font-medium shadow-sm'
+                                        : 'text-slate-700 hover:bg-slate-200/60 hover:text-slate-900'
+                                        }`}
+                                >
+                                    <div className="flex flex-row justify-between items-center w-full">
+                                        <span className={`text-xs font-bold px-2.5 py-2 rounded ${isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-200/80 text-slate-700'
+                                            }`}>
+                                            {primaryHouse || '—'}
+                                        </span>
+                                        <div className="flex-1 gap-1 text-left">
+                                            <div className="truncate pl-2 font-semibold">
+                                                {ownerObj.owner}
+                                            </div>
+                                            <div className={`text-xs truncate pl-2 ${isSelected ? 'text-white/60' : 'text-slate-500'}`}>
+                                                {ownerObj.locality}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                        );
-                    })}
+                                </button>
+                            );
+                        })) : (
+                        <div className="text-center py-8 text-sm text-slate-400 font-medium">
+                            Власників не знайдено
+                        </div>
+                    )}
                 </div>
             </aside>
             <div className="relative flex-1 h-full bg-slate-100">
@@ -257,12 +276,14 @@ export default function Map() {
                                         onEachFeature={onEachParcel}
                                         style={(feature) => {
                                             const currentFeatureHouse = feature?.properties?.house_number || feature?.properties?.houseNum;
+                                            const currentFeatureOwner = feature?.properties?.owner?.trim();
                                             const featureHouseInt = currentFeatureHouse ? parseInt(currentFeatureHouse, 10) : null;
                                             const currentFeatureType = feature?.properties.type;
 
                                             // Crucial check: BOTH the name and the house integer must match perfectly
                                             if (
                                                 selectedOwner &&
+                                                currentFeatureOwner === selectedOwner.owner &&
                                                 featureHouseInt &&
                                                 selectedOwner.houseNumbers.includes(featureHouseInt)
                                             ) {
