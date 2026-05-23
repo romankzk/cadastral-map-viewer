@@ -19,7 +19,7 @@ export default function Map() {
     const [selectedOwner, setSelectedOwner] = useState<OwnerInfo | null>(null);
 
     useEffect(() => {
-        fetch('/parcels.geojson')
+        fetch('parcels.geojson')
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch parcel layer data');
                 return res.json();

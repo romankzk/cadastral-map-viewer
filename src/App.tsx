@@ -1,21 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import './App.css'
-import Map from './pages/Map';
 
 export default function App() {
 	return (
-		<BrowserRouter>
-			{/* Navigation */}
-			{/* <nav className='flex flex-row gap-2'>
-				<Link to="/">Home</Link>
-				<Link to="/about">About</Link>
-				<Link to="/contact">Contact</Link>
-			</nav> */}
-
-			{/* Routes */}
-			<Routes>
-				<Route path="/" element={<Map />} />
-			</Routes>
-		</BrowserRouter>
+		<div className="w-full h-screen flex flex-col bg-slate-50 overflow-hidden">
+			{/* Main workspace container */}
+			<main className="flex-1 relative w-full h-full">
+				<Outlet />
+			</main>
+		</div>
 	)
 }
