@@ -1,12 +1,10 @@
-import React from 'react';
-
 export default function OpacitySlider({ opacity, onChange }: { opacity: number, onChange: (e: number) => void }) {
   return (
     <div className="absolute bottom-10 left-5 z-[1000] min-w-[220px] rounded-lg bg-white p-4 shadow-lg border border-slate-100 pointer-events-auto">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
-          <label 
-            htmlFor="opacity-range" 
+          <label
+            htmlFor="opacity-range"
             className="text-sm font-semibold text-slate-700 select-none"
           >
             Прозорість
@@ -15,7 +13,7 @@ export default function OpacitySlider({ opacity, onChange }: { opacity: number, 
             {Math.round(opacity * 100)}%
           </span>
         </div>
-        
+
         <input
           id="opacity-range"
           type="range"

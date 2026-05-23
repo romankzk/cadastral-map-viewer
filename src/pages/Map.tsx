@@ -1,4 +1,4 @@
-import { LayersControl, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { GeoJSON } from 'react-leaflet/GeoJSON'
 import { useEffect, useState } from "react";
@@ -257,7 +257,6 @@ export default function Map() {
                                         onEachFeature={onEachParcel}
                                         style={(feature) => {
                                             const currentFeatureHouse = feature?.properties?.house_number || feature?.properties?.houseNum;
-                                            const currentFeatureOwner = feature?.properties?.owner?.trim();
                                             const featureHouseInt = currentFeatureHouse ? parseInt(currentFeatureHouse, 10) : null;
                                             const currentFeatureType = feature?.properties.type;
 
