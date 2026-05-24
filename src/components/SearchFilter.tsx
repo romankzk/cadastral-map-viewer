@@ -5,7 +5,7 @@ interface SearchFilterProps {
 
 export default function SearchFilter({ value, onChange }: SearchFilterProps) {
   return (
-    <div className="relative w-full px-3 py-2 border-b border-slate-200">
+    <div className="relative w-full pb-3 border-b border-slate-200">
       <div className="relative flex items-center">
         {/* Search Icon */}
         <span className="absolute left-3 text-slate-400 pointer-events-none">
