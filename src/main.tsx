@@ -2,8 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import Map from './routes/Map.tsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import LishchovateMap from './routes/LishchovateMap.tsx';
+import PerehnoivMap from './routes/PerehnoivMap.tsx';
+import Home from './routes/Home.tsx';
 
 const router = createBrowserRouter([
   {
@@ -12,7 +14,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Map />
+        element: <Home />
+      },
+      {
+        path: 'maps/lishchovate',
+        element: <LishchovateMap />
+      },
+      {
+        path: 'maps/perehnoiv',
+        element: <PerehnoivMap />
+      },
+      {
+        path: 'maps', // Fallback root redirect
+        element: <Navigate to="/" replace />
       }
     ]
   }

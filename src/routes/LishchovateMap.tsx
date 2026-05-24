@@ -10,11 +10,13 @@ import { getFeatureStyle } from "../utils/style-utils";
 import type { LatLngBoundsExpression, Layer } from "leaflet";
 import type { Feature } from 'geojson';
 import OwnersSidebar from "../components/OwnersSidebar";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
-export default function Map() {
+export default function LishchovateMap() {
     const [opacity, setOpacity] = useState(0.75);
     const { data, owners } = useGeojsonData();
     const [selectedOwner, setSelectedOwner] = useState<OwnerInfo | null>(null);
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     const mapCenter: [number, number] = [49.49888, 22.56085];
     const mapZoom = 14;
@@ -22,6 +24,14 @@ export default function Map() {
         [49.45284, 22.39202], // South-West corner
         [49.56208, 22.70720]  // North-East corner
     ];
+
+    const handleCollapsedChange = () => {
+        if (isCollapsed) {
+            setIsCollapsed(false);
+        } else {
+            setIsCollapsed(true);
+        }
+    };
 
     // Style each feature on init
     const onFeatureStyle = (feature: Feature | undefined) => {
@@ -84,14 +94,29 @@ export default function Map() {
     };
 
     return (
-        <div className="flex flex-row w-full h-screen overflow-hidden">
-            <OwnersSidebar owners={owners} selectedOwner={selectedOwner} onSelectOwner={(owner) => setSelectedOwner(owner)} />
+        <div className="flex flex-1 w-full h-screen overflow-hidden">
+            <OwnersSidebar
+                titleText="Карта села Ліщовате"
+                owners={owners}
+                selectedOwner={selectedOwner}
+                onSelectOwner={(owner) => setSelectedOwner(owner)}
+                isCollapsed={isCollapsed}
+                onCollapsedChange={setIsCollapsed}
+            />
 
-            <div className="relative flex-1 h-full bg-slate-100">
-                <div className="relative w-full h-[100vh]">
+            <div className="relative flex-1 min-w-0 h-full bg-slate-100">
+                <div className="absolute inset-0 w-full h-full">
+                    <button
+                        onClick={handleCollapsedChange}
+                        className="absolute z-1000 left-5 top-5 rounded-lg bg-white text-slate-700 p-2 shadow-lg border border-slate-100 rounded-md transition-colors shadow-md cursor-pointer"
+                    >
+                        {isCollapsed ? (<PanelLeftOpen size={20} />) : (<PanelLeftClose size={20} />)}
+
+                    </button>
                     <OpacitySlider opacity={opacity} onChange={setOpacity} />
 
                     <MapContainer
+                        key={isCollapsed ? 'map-collapsed' : 'map-expanded'}
                         className="w-full h-full"
                         center={mapCenter}
                         zoom={mapZoom}

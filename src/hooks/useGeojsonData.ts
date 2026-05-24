@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import type { OwnerInfo } from "../types";
+import type { Feature } from 'geojson';
 
 export function useGeojsonData() {
     const [data, setData] = useState(null);
     const [owners, setOwners] = useState<OwnerInfo[]>([]);
+    const fetchUrl = `${import.meta.env.BASE_URL}data/parcels.geojson`;
 
     useEffect(() => {
-        fetch('parcels.geojson')
+        fetch(fetchUrl)
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch parcel layer data');
                 return res.json();
@@ -15,13 +17,13 @@ export function useGeojsonData() {
                 setData(data);
 
                 if (data && data.features) {
-                    const ownersMap: { [key: string]: any } = {};
+                    const ownersMap: { [key: string]: OwnerInfo } = {};
 
-                    data.features.forEach((feature: any) => {
+                    data.features.forEach((feature: Feature) => {
                         const ownerName = feature.properties?.owner?.trim();
                         const rawHouseNum = feature.properties?.house_number || feature.properties?.houseNum;
                         const houseNum = rawHouseNum ? parseInt(rawHouseNum, 10) : null;
-                        const locality = feature.properties.locality;
+                        const locality = feature?.properties?.locality;
 
                         if (ownerName && ownerName !== '' && houseNum) {
                             const uniqueKey = `${ownerName}-${houseNum}`;
@@ -49,7 +51,7 @@ export function useGeojsonData() {
                 }
             })
             .catch((err) => console.error(err));
-    }, []);
+    }, [fetchUrl]);
 
     return { data, owners }
 }
