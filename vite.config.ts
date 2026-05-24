@@ -9,4 +9,7 @@ export default defineConfig({
     tailwindcss()
   ],
   base: '/cadastral-map-viewer/',
+  server: {
+    open: '/cadastral-map-viewer/'
+  }
 })

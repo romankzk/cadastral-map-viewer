@@ -11,8 +11,11 @@ import type { LatLngBoundsExpression, Layer } from "leaflet";
 import type { Feature } from 'geojson';
 import OwnersSidebar from "../components/OwnersSidebar";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export default function LishchovateMap() {
+    useDocumentTitle("Ліщовате - Історичні кадастрові карти");
+    
     const [opacity, setOpacity] = useState(0.75);
     const { data, owners } = useGeojsonData();
     const [selectedOwner, setSelectedOwner] = useState<OwnerInfo | null>(null);
