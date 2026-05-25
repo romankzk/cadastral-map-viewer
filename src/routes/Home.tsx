@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 interface VillageCard {
     slug: string;
@@ -12,6 +13,7 @@ interface VillageCard {
 
 export default function Home() {
     const { t } = useTranslation();
+    useDocumentTitle(t('home.documentTitle'));
 
     const FeaturedMaps: VillageCard[] = [
         {
@@ -85,15 +87,15 @@ export default function Home() {
                     </div>
                 ))}
             </div>
-
-            <div className="flex flex-col items-center mt-8">
-                <LanguageSwitcher />
-            </div>
-
+            
             {/* Footer Info Note */}
             <footer className="mt-8 text-center text-xs text-slate-400 font-medium">
                 {t('home.footer')}
             </footer>
+
+            <div className="flex flex-col items-center mt-8">
+                <LanguageSwitcher />
+            </div>
         </div>
     );
 }

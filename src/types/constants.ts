@@ -1,39 +1,46 @@
 import type { PathOptions } from "leaflet";
 
+export const Colors = {
+    Red500: "#ef4444",
+    Red100: "#fee2e2",
+    Amber500: "#f59e0b",
+    Blue500: "#3b82f6",
+}
+
 export const ParcelStyles: Record<string, PathOptions> = {
     default: {
-        color: '#e54653',
-        weight: 1.5,
-        fillColor: '#e3707a',
+        color: Colors.Red500,
+        weight: 1,
+        fillColor: Colors.Red500,
         fillOpacity: 0.15
     },
     building: {
-        color: '#e54653',
+        color: Colors.Red500,
         weight: 1.5,
-        fillColor: '#e3d670',
+        fillColor: Colors.Amber500,
         fillOpacity: 0.5
     },
     yard: {
-        color: '#e54653',
-        weight: 1.5,
-        fillColor: '#ffd2d6',
+        color: Colors.Red500,
+        weight: 1,
+        fillColor: Colors.Red100,
         fillOpacity: 0.5
     },
     household: {
-        color: '#e54653',
-        weight: 1.5,
-        fillColor: '#e3707a',
+        color: Colors.Red500,
+        weight: 1,
+        fillColor: Colors.Red500,
         fillOpacity: 0.4
     },
     selected: {
-        color: '#ef4444',
-        weight: 2,
-        fillColor: '#5692d6',
+        color: Colors.Red500,
+        weight: 2.5,
+        fillColor: Colors.Blue500,
         fillOpacity: 0.5
     },
     hover: {
         weight: 2.5, 
-        fillOpacity: 0.3, 
-        color: '#e54653'
+        fillOpacity: 0.5, 
+        color: Colors.Red500
     }
 } as const;

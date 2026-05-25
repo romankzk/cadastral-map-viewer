@@ -3,6 +3,7 @@ import { useOwnerSearch } from "../hooks/useOwnerSearch";
 import type { OwnerInfo } from "../types";
 import SearchFilter from "./SearchFilter";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface OwnersSidebarProps {
     titleText: string;
@@ -15,6 +16,7 @@ interface OwnersSidebarProps {
 
 export default function OwnersSidebar({ titleText, owners, selectedOwner, onSelectOwner, isCollapsed }: OwnersSidebarProps) {
     const { searchTerm, setSearchTerm, filteredOwners } = useOwnerSearch(owners);
+    const { t } = useTranslation();
 
     return (
         <>
@@ -69,7 +71,7 @@ export default function OwnersSidebar({ titleText, owners, selectedOwner, onSele
                             );
                         })) : (
                         <div className="text-center py-8 text-sm text-slate-400 font-medium">
-                            Власників не знайдено
+                            {t('lishchovateMap.sidebar.searchNotFound')}
                         </div>
                     )}
                 </div>

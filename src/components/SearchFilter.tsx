@@ -30,7 +30,6 @@ export default function SearchFilter({ value, onChange }: SearchFilterProps) {
           <button
             onClick={() => onChange('')}
             className="absolute right-2.5 p-0.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-200 transition-colors"
-            title="Очистити пошук"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

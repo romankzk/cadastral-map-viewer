@@ -1,5 +1,6 @@
 {
     "home": {
+        "documentTitle": "Historyczne mapy katastralne",
         "title": "Historyczne mapy katastralne",
         "subtitle": "Interaktywna przeglądarka map historycznych i planów gromad Galicji.",
         "cards": {
@@ -23,7 +24,8 @@
         "documentTitle": "Leszczowate - Historyczne mapy katastralne",
         "sidebar": {
             "title": "Mapa wsi Leszczowate",
-            "searchPlaceholder": "Wyszukiwanie właściciela..."
+            "searchPlaceholder": "Wyszukiwanie właściciela...",
+            "searchNotFound": "Nie znaleziono właścicieli"
         },
         "map": {
             "opacityLabel": "Przezroczystość",
