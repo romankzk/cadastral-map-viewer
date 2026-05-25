@@ -21,6 +21,14 @@ export default function LanguageSwitcher() {
       >
         PL
       </button>
+      <button
+        onClick={() => i18n.changeLanguage('en')}
+        className={`cursor-pointer px-2 py-1 text-xs font-bold rounded border transition-colors ${
+          i18n.language === 'en' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+        }`}
+      >
+        EN
+      </button>
     </div>
   );
 }

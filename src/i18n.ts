@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import translationUK from './locales/uk.json';
 import translationPL from './locales/pl.json';
+import translationEN from './locales/en.json';
 
 i18n
   .use(LanguageDetector)
@@ -11,7 +12,8 @@ i18n
   .init({
     resources: {
       uk: { translation: translationUK },
-      pl: { translation: translationPL }
+      pl: { translation: translationPL },
+      en: { translation: translationEN }
     },
     fallbackLng: 'uk',
     detection: {

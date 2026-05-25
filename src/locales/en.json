@@ -1,0 +1,49 @@
+{
+    "home": {
+        "documentTitle": "Historical Cadastral Maps",
+        "title": "Historical Cadastral Maps",
+        "subtitle": "Interactive viewer for historical cadastral maps and plans of the Halychyna (Galicia) region.",
+        "cards": {
+            "perehnoiv": {
+                "title": "Perehnoiv",
+                "region": "Hlyniany community, Lviv region",
+                "description": "Historically, the village was part of the Hlyniany starostwo, and later the Złoczów Kreis. The final cadastral map and its accompanying descriptive records are preserved in CDIAL: fond 186, series 6, file 886 and fond 186, series 1, files 2426–2428.",
+                "date": "1845"
+            },
+            "lishchovate": {
+                "title": "Leszczowate (and Wola Maćkowa)",
+                "region": "Bieszczady County, Subcarpathian voivodeship",
+                "description": "Historically, the village was owned by the Kraiński family, within the boundaries of the historical Sanok Kreis. The map is based on an indication sketch from 1852 and the final map (undated, circa 1855) from the State Archive in Przemyśl - Archiwum Geodezyjne. - Leszczowate. - sygn. 3 (56/126/0/649/3) and sygn. 0896M (56/126/0/-/0896M)",
+                "date": "1852-1855"
+            },
+            "openBtn": "Open map"
+        },
+        "footer": "Maps and data are processed based on original cadastral records from the Central State Historical Archive of Ukraine in Lviv (CDIAL) and the State Archive in Przemyśl (Poland)."
+        
+    },
+    "lishchovateMap": {
+        "documentTitle": "Leszczowate - Historical Cadastral Maps",
+        "sidebar": {
+            "title": "Leszczowate Map",
+            "searchPlaceholder": "Search for a landowner...",
+            "searchNotFound": "No landowners found"
+        },
+        "map": {
+            "opacityLabel": "Opacity",
+            "layerControl": {
+                "osm": "OpenStreetMap",
+                "sattelite": "Satellite Map",
+                "cadastral": "1855 Map",
+                "parcels": "Interactive Parcels"
+            }
+        }
+    },
+    "perehnoivMap": {
+        "documentTitle": "Perehnoiv - Historical Cadastral Maps",
+        "title": "Perehnoiv",
+        "inDevelopmentLabel": "Map under construction",
+        "description": "We are actively working on processing archival cadastral maps, georeferencing coordinates, and verifying the lists of historical landowners.",
+        "comingSoon": "Coming soon.",
+        "backBtn": "Back to Home"
+    }
+}
