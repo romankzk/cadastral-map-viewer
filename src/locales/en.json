@@ -19,7 +19,6 @@
             "openBtn": "Open map"
         },
         "footer": "Maps and data are processed based on original cadastral records from the Central State Historical Archive of Ukraine in Lviv (CDIAL) and the State Archive in Przemyśl (Poland)."
-        
     },
     "lishchovateMap": {
         "documentTitle": "Leszczowate - Historical Cadastral Maps",
@@ -40,7 +39,9 @@
     },
     "perehnoivMap": {
         "documentTitle": "Perehnoiv - Historical Cadastral Maps",
-        "title": "Perehnoiv",
+        "title": "Perehnoiv"
+    },
+    "comingSoon": {
         "inDevelopmentLabel": "Map under construction",
         "description": "We are actively working on processing archival cadastral maps, georeferencing coordinates, and verifying the lists of historical landowners.",
         "comingSoon": "Coming soon.",

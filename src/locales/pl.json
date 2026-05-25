@@ -39,7 +39,9 @@
     },
     "perehnoivMap": {
         "documentTitle": "Przegnojów - Historyczne mapy katastralne",
-        "title": "Przegnojów",
+        "title": "Przegnojów"
+    },
+    "comingSoon": {
         "inDevelopmentLabel": "Mapa w trakcie opracowywania",
         "description": "Aktualnie zajmujemy się przetwarzaniem archiwalnych map katastralnych, kalibracją współrzędnych i weryfikacją list historycznych właścicieli działek.",
         "comingSoon": "Planujemy opublikować ją w niedalekiej przyszłości.",
