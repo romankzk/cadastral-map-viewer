@@ -2,13 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import { createHashRouter, Navigate, RouterProvider } from 'react-router-dom';
 import LishchovateMap from './routes/LishchovateMap.tsx';
 import PerehnoivMap from './routes/PerehnoivMap.tsx';
 import Home from './routes/Home.tsx';
 import './i18n';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />,
@@ -32,7 +32,6 @@ const router = createBrowserRouter([
     ]
   }
 ], {
-  basename: '/cadastral-map-viewer'
 });
 
 createRoot(document.getElementById('root')!).render(
