@@ -12,9 +12,12 @@ import type { Feature } from 'geojson';
 import OwnersSidebar from "../components/OwnersSidebar";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export default function LishchovateMap() {
-    useDocumentTitle("Ліщовате - Історичні кадастрові карти");
+    const { t, i18n } = useTranslation();
+    useDocumentTitle(t('lishchovateMap.documentTitle'));
     
     const [opacity, setOpacity] = useState(0.75);
     const { data, owners } = useGeojsonData();
@@ -99,7 +102,7 @@ export default function LishchovateMap() {
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
             <OwnersSidebar
-                titleText="Карта села Ліщовате"
+                titleText={t('lishchovateMap.sidebar.title')}
                 owners={owners}
                 selectedOwner={selectedOwner}
                 onSelectOwner={(owner) => setSelectedOwner(owner)}
@@ -108,14 +111,19 @@ export default function LishchovateMap() {
             />
 
             <div className="relative flex-1 min-w-0 h-full bg-slate-100">
+                {/* Expand/collapse sidebar button */}
                 <div className="absolute inset-0 w-full h-full">
                     <button
                         onClick={handleCollapsedChange}
-                        className="absolute z-1000 left-5 top-5 rounded-lg bg-white text-slate-700 p-2 shadow-lg border border-slate-100 rounded-md transition-colors shadow-md cursor-pointer"
+                        className="absolute z-1000 left-5 top-5 rounded-lg bg-white text-slate-700 p-2 shadow-lg border border-slate-100 transition-colors shadow-md cursor-pointer"
                     >
                         {isCollapsed ? (<PanelLeftOpen size={20} />) : (<PanelLeftClose size={20} />)}
 
                     </button>
+
+                    <div className="absolute z-1000 left-20 top-5 rounded-lg bg-white shadow-lg border border-slate-100 p-1.5 transition-colors">
+                        <LanguageSwitcher />
+                    </div>
                     <OpacitySlider opacity={opacity} onChange={setOpacity} />
 
                     <MapContainer
@@ -131,22 +139,22 @@ export default function LishchovateMap() {
                         zoomControl={false}
                     >
                         <ZoomControl position="bottomright" />
-                        <LayersControl position="topright" collapsed={false}>
+                        <LayersControl position="topright" collapsed={false} key={i18n.language}>
 
-                            <LayersControl.BaseLayer checked name="OpenStreetMap">
+                            <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.osm')}>
                                 <TileLayer
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
                             </LayersControl.BaseLayer>
 
-                            <LayersControl.BaseLayer checked name="Супутникова карта">
+                            <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.sattelite')}>
                                 <TileLayer
                                     url="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                                 />
                             </LayersControl.BaseLayer>
 
-                            <LayersControl.Overlay checked name="Карта 1855 р.">
+                            <LayersControl.Overlay checked name={t('lishchovateMap.map.layerControl.cadastral')}>
                                 <TileLayer
                                     url="https://romankzk.github.io/map-tiles-leszczowate/tiles-1855/{z}/{x}/{y}.png"
                                     minZoom={12}
@@ -157,7 +165,7 @@ export default function LishchovateMap() {
                             </LayersControl.Overlay>
 
                             {data && (
-                                <LayersControl.Overlay checked name="Інтерактивні ділянки">
+                                <LayersControl.Overlay checked name={t('lishchovateMap.map.layerControl.parcels')}>
                                     <GeoJSON
                                         data={data}
                                         onEachFeature={onEachParcel}

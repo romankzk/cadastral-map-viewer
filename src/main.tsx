@@ -6,6 +6,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import LishchovateMap from './routes/LishchovateMap.tsx';
 import PerehnoivMap from './routes/PerehnoivMap.tsx';
 import Home from './routes/Home.tsx';
+import './i18n';
 
 const router = createBrowserRouter([
   {

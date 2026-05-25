@@ -1,9 +1,11 @@
 import { Blocks } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useTranslation } from "react-i18next";
 
 export default function PerehnoivMap() {
-    useDocumentTitle("Перегноїв - Історичні кадастрові карти");
+    const { t } = useTranslation();
+    useDocumentTitle(t('perehnoivMap.documentTitle'));
     
     return (
         <div className="absolute inset-0 w-full h-full bg-slate-50 flex items-center justify-center p-6">
@@ -19,15 +21,15 @@ export default function PerehnoivMap() {
 
                 {/* Content */}
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200 mb-3">
-                    Карта в розробці
+                    {t('perehnoivMap.inDevelopmentLabel')}
                 </span>
 
                 <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-                    Перегноїв
+                    {t('perehnoivMap.title')}
                 </h2>
 
                 <p className="mt-3 text-sm text-slate-500 leading-relaxed">
-                    Наразі ми працюємо над опрацюванням архівних кадастрових карт, прив'язкою координат та верифікацією списків історичних власників земельних наділів.
+                    {t('perehnoivMap.description')}
                 </p>
 
                 {/* Informational Box */}
@@ -35,7 +37,7 @@ export default function PerehnoivMap() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Плануємо публікацію найближчим часом.
+                    {t('perehnoivMap.comingSoon')}
                 </div>
 
                 {/* Navigation Action Button */}
@@ -47,7 +49,7 @@ export default function PerehnoivMap() {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
-                        Повернутися на головну
+                        {t('perehnoivMap.backBtn')}
                     </Link>
                 </div>
 

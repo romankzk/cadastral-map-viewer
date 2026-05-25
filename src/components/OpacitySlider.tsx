@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function OpacitySlider({ opacity, onChange }: { opacity: number, onChange: (e: number) => void }) {
+  const { t } = useTranslation();
+  
   return (
     <div className="absolute bottom-5 left-5 z-[1000] min-w-[220px] rounded-lg bg-white p-4 shadow-lg border border-slate-100 pointer-events-auto">
       <div className="flex flex-col gap-2">
@@ -7,7 +11,7 @@ export default function OpacitySlider({ opacity, onChange }: { opacity: number, 
             htmlFor="opacity-range"
             className="text-sm font-semibold text-slate-700 select-none"
           >
-            Прозорість
+            {t('lishchovateMap.map.opacityLabel')}
           </label>
           <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
             {Math.round(opacity * 100)}%

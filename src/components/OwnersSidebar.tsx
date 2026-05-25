@@ -32,7 +32,9 @@ export default function OwnersSidebar({ titleText, owners, selectedOwner, onSele
                     </Link>
                     <h2 className="text-lg font-bold text-slate-800">{titleText}</h2>
                 </div>
+
                 <SearchFilter value={searchTerm} onChange={setSearchTerm} />
+
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
                     {filteredOwners.length > 0 ? (
                         filteredOwners.map((ownerObj) => {

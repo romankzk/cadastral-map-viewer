@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 interface VillageCard {
     slug: string;
@@ -8,33 +10,35 @@ interface VillageCard {
     description: string;
 }
 
-const FeaturedMaps: VillageCard[] = [
-    {
-        slug: 'perehnoiv',
-        title: 'Перегноїв',
-        region: 'Глинянська громада, Львівська область',
-        date: '1845 рік',
-        description: 'Історично село у складі Глинянського староства, пізніше Золочівського округу. Фінальна карта з фонду 186 ЦДІАЛ.'
-    },
-    {
-        slug: 'lishchovate',
-        title: 'Ліщовате',
-        region: 'Бещадський повіт, Підкарпатське воєводство',
-        date: '1852-1855 роки',
-        description: 'Раніше у власності родини Країнських, у складі Сяноцького округу. Карта на основі ескізу 1852 року та фінальної карти (недатована, бл. 1855 р.) з Державного архіву у Перемишлі.'
-    }
-];
-
 export default function Home() {
+    const { t } = useTranslation();
+
+    const FeaturedMaps: VillageCard[] = [
+        {
+            slug: 'lishchovate',
+            title: t('home.cards.lishchovate.title'),
+            region: t('home.cards.lishchovate.region'),
+            date: t('home.cards.lishchovate.date'),
+            description: t('home.cards.lishchovate.description')
+        },
+        {
+            slug: 'perehnoiv',
+            title: t('home.cards.perehnoiv.title'),
+            region: t('home.cards.perehnoiv.region'),
+            date: t('home.cards.perehnoiv.date'),
+            description: t('home.cards.perehnoiv.description')
+        }
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-6 py-12">
             {/* Platform Header */}
             <header className="text-center mb-12">
                 <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
-                    Історичні кадастрові карти
+                    {t('home.title')}
                 </h1>
                 <p className="mt-3 text-lg text-slate-500 max-w-xl mx-auto">
-                    Інтерактивний переглядач історичних карт та планів громад Галичини.
+                    {t('home.subtitle')}
                 </p>
                 <div className="mt-4 h-0.5 w-16 bg-blue-500 mx-auto rounded" />
             </header>
@@ -72,7 +76,7 @@ export default function Home() {
                                 to={`/maps/${village.slug}`}
                                 className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-sm transition-colors"
                             >
-                                Відкрити карту
+                                {t('home.cards.openBtn')}
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
@@ -82,9 +86,13 @@ export default function Home() {
                 ))}
             </div>
 
+            <div className="flex flex-col items-center mt-8">
+                <LanguageSwitcher />
+            </div>
+
             {/* Footer Info Note */}
-            <footer className="mt-16 text-center text-xs text-slate-400 font-medium">
-                Карти та дані опрацьовано на основі оригінальних кадастрових карт з ЦДІАЛ та AP Przemyśl.
+            <footer className="mt-8 text-center text-xs text-slate-400 font-medium">
+                {t('home.footer')}
             </footer>
         </div>
     );

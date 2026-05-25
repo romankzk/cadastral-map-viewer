@@ -1,0 +1,46 @@
+{
+    "home": {
+        "title": "Historyczne mapy katastralne",
+        "subtitle": "Interaktywna przeglądarka map historycznych i planów gromad Galicji.",
+        "cards": {
+            "perehnoiv": {
+                "title": "Przegnojów",
+                "region": "Gliniany (hromada), obwód lwowski",
+                "description": "Historycznie wieś należała do starostwa gliniańskiego, póżniejszego cyrkułu złoczowskiego. Ostateczna mapa pochodzi z CDIAL",
+                "date": "1845"
+            },
+            "lishchovate": {
+                "title": "Leszczowate",
+                "region": "Powiat bieszczadzki, województwo podkarpackie",
+                "description": "Wcześniej należała do rodziny Kraińskich, część powiatu sanockiego. Mapa oparta na szkicu z 1852 roku i ostatecznej mapie (bez daty, ok. 1855) z Archiwum Państwowego w Przemyślu.",
+                "date": "1852-1855"
+            },
+            "openBtn": "Otwórz mapę"
+        },
+        "footer": "Mapy i dane opracowano w oparciu o oryginalne mapy katastralne pochodzące z CDIAL oraz AP Przemyśl."
+    },
+    "lishchovateMap": {
+        "documentTitle": "Leszczowate - Historyczne mapy katastralne",
+        "sidebar": {
+            "title": "Mapa wsi Leszczowate",
+            "searchPlaceholder": "Wyszukiwanie właściciela..."
+        },
+        "map": {
+            "opacityLabel": "Przezroczystość",
+            "layerControl": {
+                "osm": "OpenStreetMap",
+                "sattelite": "Mapa satelitarna",
+                "cadastral": "Mapa z 1855 r.",
+                "parcels": "Parcele interaktywne"
+            }
+        }
+    },
+    "perehnoivMap": {
+        "documentTitle": "Przegnojów - Historyczne mapy katastralne",
+        "title": "Przegnojów",
+        "inDevelopmentLabel": "Mapa w trakcie opracowywania",
+        "description": "Aktualnie zajmujemy się przetwarzaniem archiwalnych map katastralnych, łączeniem współrzędnych i weryfikacją list historycznych właścicieli działek.",
+        "comingSoon": "Planujemy opublikować ją w niedalekiej przyszłości.",
+        "backBtn": "Powrót do strony głównej"
+    }
+}
