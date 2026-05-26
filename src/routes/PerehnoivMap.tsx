@@ -9,12 +9,16 @@ import { LayersControl, MapContainer, ZoomControl, TileLayer } from "react-leafl
 import i18n from "../i18n";
 import { useOwnersData } from "../hooks/useOwnersData";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { useOwnerModal } from "../hooks/useOwnerModal";
+import OwnerDetailsModal from "../components/OwnerDetailsModal";
 
 export default function PerehnoivMap() {
     const { t } = useTranslation();
     useDocumentTitle(t('perehnoivMap.documentTitle'));
 
     const { owners } = useOwnersData('perehnoiv-owners.json', false);
+    const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
+
     const [opacity, setOpacity] = useState(0.75);
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -41,6 +45,7 @@ export default function PerehnoivMap() {
                 isSelectable={false}
                 isCollapsed={isCollapsed}
                 onCollapsedChange={setIsCollapsed}
+                onDetailsClick={handleModalOpen}
             />
 
             <div className="relative flex-1 min-w-0 h-full bg-slate-100">
@@ -87,6 +92,13 @@ export default function PerehnoivMap() {
                                 />
                             </LayersControl.BaseLayer>
                         </LayersControl>
+
+                        <OwnerDetailsModal
+                            isOpen={isModalOpen}
+                            onClose={handleModalClose}
+                            ownerData={modalData}
+                        />
+
                     </MapContainer>
                 </div>
             </div>

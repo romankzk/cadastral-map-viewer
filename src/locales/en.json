@@ -24,6 +24,15 @@
         "searchPlaceholder": "Search for a landowner...",
         "searchNotFound": "No landowners found"
     },
+    "ownerModal": {
+        "title": "Landowner information",
+        "houseNumber": "House Number",
+        "locality": "Locality",
+        "original": "Original Record",
+        "note": "Notes",
+        "buildParcels": "Building Parcels",
+        "landParcels": "Land Parcels"
+    },
     "lishchovateMap": {
         "documentTitle": "Leszczowate - Historical Cadastral Maps",
         "sidebarTitle": "Leszczowate Map",

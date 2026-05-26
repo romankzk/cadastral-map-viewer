@@ -24,6 +24,15 @@
         "searchPlaceholder": "Wyszukiwanie właściciela...",
         "searchNotFound": "Nie znaleziono właścicieli"
     },
+    "ownerModal": {
+        "title": "Informacje o właścicielu",
+        "houseNumber": "Numer domu",
+        "locality": "Miejscowość",
+        "original": "Oryginalny rekord",
+        "note": "Notatki",
+        "buildParcels": "Działki budowlane",
+        "landParcels": "Działki gruntowe"
+    },
     "lishchovateMap": {
         "documentTitle": "Leszczowate - Historyczne mapy katastralne",
         "sidebarTitle": "Mapa wsi Leszczowate",

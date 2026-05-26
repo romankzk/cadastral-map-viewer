@@ -15,6 +15,8 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { useOwnersData } from "../hooks/useOwnersData";
+import OwnerDetailsModal from "../components/OwnerDetailsModal";
+import { useOwnerModal } from "../hooks/useOwnerModal";
 
 export default function LishchovateMap() {
     const { t, i18n } = useTranslation();
@@ -23,6 +25,8 @@ export default function LishchovateMap() {
     const [opacity, setOpacity] = useState(0.75);
     const { data: parcels } = useParcelsData('leszczowate-parcels.geojson');
     const { owners } = useOwnersData('leszczowate-parcels.geojson', true);
+    const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
+    
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -111,6 +115,7 @@ export default function LishchovateMap() {
                 onSelectOwner={(owner) => setSelectedOwner(owner)}
                 isCollapsed={isCollapsed}
                 onCollapsedChange={setIsCollapsed}
+                onDetailsClick={handleModalOpen}
             />
 
             <div className="relative flex-1 min-w-0 h-full bg-slate-100">
@@ -178,6 +183,12 @@ export default function LishchovateMap() {
                                 </LayersControl.Overlay>
                             )}
                         </LayersControl>
+
+                        <OwnerDetailsModal
+                            isOpen={isModalOpen}
+                            onClose={handleModalClose}
+                            ownerData={modalData}
+                        />
                     </MapContainer>
                 </div>
             </div>

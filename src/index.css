@@ -8,6 +8,11 @@
   font-family: 'Inter', 'Roboto', sans-serif;
 }
 
+.leaflet-container,
+.leaflet-container * {
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
 .leaflet-control,
 .leaflet-control-layers {
   font-family: 'Inter', 'Roboto', sans-serif;

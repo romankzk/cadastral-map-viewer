@@ -26,7 +26,5 @@ export function useOwnersData(filename: string, isGeojson: boolean = false) {
         fetchData();
     }, [fetchUrl]);
 
-    console.log(owners);
-
     return { owners }
 }

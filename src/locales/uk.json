@@ -24,6 +24,15 @@
         "searchPlaceholder": "Пошук власника...",
         "searchNotFound": "Власників не знайдено"
     },
+    "ownerModal": {
+        "title": "Інформація про власника",
+        "houseNumber": "Номер будинку",
+        "locality": "Місцевість",
+        "original": "Оригінальний запис",
+        "note": "Примітки",
+        "buildParcels": "Будівельних ділянок",
+        "landParcels": "Земельних ділянок"
+    },
     "lishchovateMap": {
         "documentTitle": "Ліщовате - Історичні кадастрові карти",
         "sidebarTitle": "Карта села Ліщовате",

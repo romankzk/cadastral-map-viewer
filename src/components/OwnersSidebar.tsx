@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CircleUserRound } from "lucide-react";
 import { useOwnerSearch } from "../hooks/useOwnerSearch";
 import type { Owner } from "../types";
 import SearchFilter from "./SearchFilter";
@@ -13,9 +13,10 @@ interface OwnersSidebarProps {
     onSelectOwner?: (selectedOwner: Owner) => void
     isCollapsed?: boolean
     onCollapsedChange?: (collapsed: boolean) => void
+    onDetailsClick?: (ownerData: Owner) => void
 }
 
-export default function OwnersSidebar({ titleText, owners, isSelectable = true, selectedOwner, onSelectOwner, isCollapsed }: OwnersSidebarProps) {
+export default function OwnersSidebar({ titleText, owners, isSelectable = true, selectedOwner, onSelectOwner, isCollapsed, onDetailsClick }: OwnersSidebarProps) {
     const { searchTerm, setSearchTerm, filteredOwners } = useOwnerSearch(owners);
     const { t } = useTranslation();
 
@@ -41,36 +42,17 @@ export default function OwnersSidebar({ titleText, owners, isSelectable = true, 
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
                     {filteredOwners.length > 0 ? (
                         filteredOwners.map((ownerObj) => {
-                            const primaryHouse = ownerObj.houseNumber;
-
                             const isSelected = isSelectable ? selectedOwner?.id === ownerObj.id : false;
 
                             return (
-                                <button
-                                    id={`owner-btn-${ownerObj.id}`}
-                                    key={ownerObj.id}
-                                    onClick={isSelectable && onSelectOwner ? () => onSelectOwner(ownerObj) : undefined}
-                                    className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-150 block ${isSelectable && isSelected
-                                        ? 'bg-blue-600 text-white font-medium shadow-sm'
-                                        : 'text-slate-700 hover:bg-slate-200/60 hover:text-slate-900'
-                                        }`}
-                                >
-                                    <div className="flex flex-row justify-between items-center w-full">
-                                        <span className={`text-xs font-bold px-2.5 py-2 rounded ${isSelectable && isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-200/80 text-slate-700'
-                                            }`}>
-                                            {primaryHouse || '—'}
-                                        </span>
-                                        <div className="flex-1 gap-1 text-left">
-                                            <div className="truncate pl-2 font-semibold">
-                                                {ownerObj.ownerName}
-                                            </div>
-                                            <div className={`text-xs truncate pl-2 ${isSelectable && isSelected ? 'text-white/60' : 'text-slate-500'}`}>
-                                                {ownerObj.ownerOrigin}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-                            );
+                                <OwnerRow
+                                    owner={ownerObj}
+                                    isSelectable={isSelectable}
+                                    isSelected={isSelected}
+                                    onRowSelect={onSelectOwner}
+                                    onDetailsClick={onDetailsClick}
+                                />
+                            )
                         })) : (
                         <div className="text-center py-8 text-sm text-slate-400 font-medium">
                             {t('sidebar.searchNotFound')}
@@ -80,4 +62,53 @@ export default function OwnersSidebar({ titleText, owners, isSelectable = true, 
             </aside>
         </>
     )
+}
+
+function OwnerRow({ owner, isSelectable, isSelected, onRowSelect, onDetailsClick }: {
+    owner: Owner,
+    isSelectable: boolean,
+    isSelected: boolean,
+    onRowSelect?: (owner: Owner) => void
+    onDetailsClick?: (owner: Owner) => void
+}) {
+    return (
+        <div
+            id={`owner-btn-${owner.id}`}
+            key={owner.id}
+            onClick={isSelectable && onRowSelect ? () => onRowSelect(owner) : undefined}
+            className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-150 block ${isSelectable && isSelected
+                ? 'bg-blue-600 text-white font-medium shadow-sm'
+                : 'text-slate-700 hover:bg-slate-200/60 hover:text-slate-900'
+                }`}
+        >
+            <div className="flex flex-row justify-between items-center w-full">
+                <div className={`text-xs font-bold px-2.5 py-2 rounded ${isSelectable && isSelected
+                    ? 'bg-blue-700 text-blue-100'
+                    : 'bg-slate-200/80 text-slate-700'}`}
+                >
+                    {owner.houseNumber || '—'}
+                </div>
+                <div className="flex flex-col truncate flex-1 gap-1 text-left max-w-full">
+                    <div className="px-2 font-semibold">
+                        {owner.ownerName}
+                    </div>
+                    <div className={`text-xs px-2 ${isSelectable && isSelected ? 'text-white/60' : 'text-slate-500'}`}>
+                        {owner.ownerOrigin}
+                    </div>
+                </div>
+                
+                <button
+                    onClick={onDetailsClick ? (e) => {
+                        e.stopPropagation();
+                        onDetailsClick(owner)
+                    } : undefined}
+                    className={`text-xs px-1 py-1 rounded cursor-pointer transition-colors ${isSelectable && isSelected
+                        ? 'text-blue-100/80 hover:bg-blue-700'
+                        : 'text-slate-700 hover:bg-slate-200'}`}
+                >
+                    <CircleUserRound size={18} />
+                </button>
+            </div>
+        </div>
+    );
 }
