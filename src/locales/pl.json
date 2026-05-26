@@ -20,18 +20,18 @@
         },
         "footer": "Mapy i dane opracowano w oparciu o oryginalne operaty katastralne pochodzące z CDIAL oraz AP Przemyśl."
     },
+    "sidebar": {
+        "searchPlaceholder": "Wyszukiwanie właściciela...",
+        "searchNotFound": "Nie znaleziono właścicieli"
+    },
     "lishchovateMap": {
         "documentTitle": "Leszczowate - Historyczne mapy katastralne",
-        "sidebar": {
-            "title": "Mapa wsi Leszczowate",
-            "searchPlaceholder": "Wyszukiwanie właściciela...",
-            "searchNotFound": "Nie znaleziono właścicieli"
-        },
+        "sidebarTitle": "Mapa wsi Leszczowate",
         "map": {
             "opacityLabel": "Przezroczystość",
             "layerControl": {
                 "osm": "OpenStreetMap",
-                "sattelite": "Mapa satelitarna",
+                "satellite": "Mapa satelitarna",
                 "cadastral": "Mapa z 1855 r.",
                 "parcels": "Interaktywne parcele"
             }
@@ -39,7 +39,8 @@
     },
     "perehnoivMap": {
         "documentTitle": "Przegnojów - Historyczne mapy katastralne",
-        "title": "Przegnojów"
+        "title": "Przegnojów",
+        "sidebarTitle": "Mapa wsi Przegnojów"
     },
     "comingSoon": {
         "inDevelopmentLabel": "Mapa w trakcie opracowywania",

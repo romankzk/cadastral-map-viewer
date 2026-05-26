@@ -1,20 +1,21 @@
 import { ArrowLeft } from "lucide-react";
 import { useOwnerSearch } from "../hooks/useOwnerSearch";
-import type { OwnerInfo } from "../types";
+import type { Owner } from "../types";
 import SearchFilter from "./SearchFilter";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 interface OwnersSidebarProps {
-    titleText: string;
-    owners: OwnerInfo[];
-    selectedOwner: OwnerInfo | null;
-    onSelectOwner: (selectedOwner: OwnerInfo) => void;
-    isCollapsed?: boolean;
-    onCollapsedChange?: (collapsed: boolean) => void;
+    titleText: string
+    owners: Owner[]
+    isSelectable: boolean
+    selectedOwner?: Owner | null;
+    onSelectOwner?: (selectedOwner: Owner) => void
+    isCollapsed?: boolean
+    onCollapsedChange?: (collapsed: boolean) => void
 }
 
-export default function OwnersSidebar({ titleText, owners, selectedOwner, onSelectOwner, isCollapsed }: OwnersSidebarProps) {
+export default function OwnersSidebar({ titleText, owners, isSelectable = true, selectedOwner, onSelectOwner, isCollapsed }: OwnersSidebarProps) {
     const { searchTerm, setSearchTerm, filteredOwners } = useOwnerSearch(owners);
     const { t } = useTranslation();
 
@@ -40,30 +41,31 @@ export default function OwnersSidebar({ titleText, owners, selectedOwner, onSele
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
                     {filteredOwners.length > 0 ? (
                         filteredOwners.map((ownerObj) => {
-                            const isSelected = selectedOwner?.id === ownerObj.id;
-                            const primaryHouse = ownerObj.houseNumbers.join(', ');
+                            const primaryHouse = ownerObj.houseNumber;
+
+                            const isSelected = isSelectable ? selectedOwner?.id === ownerObj.id : false;
 
                             return (
                                 <button
                                     id={`owner-btn-${ownerObj.id}`}
                                     key={ownerObj.id}
-                                    onClick={() => onSelectOwner(ownerObj)}
-                                    className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-150 block ${isSelected
+                                    onClick={isSelectable && onSelectOwner ? () => onSelectOwner(ownerObj) : undefined}
+                                    className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-150 block ${isSelectable && isSelected
                                         ? 'bg-blue-600 text-white font-medium shadow-sm'
                                         : 'text-slate-700 hover:bg-slate-200/60 hover:text-slate-900'
                                         }`}
                                 >
                                     <div className="flex flex-row justify-between items-center w-full">
-                                        <span className={`text-xs font-bold px-2.5 py-2 rounded ${isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-200/80 text-slate-700'
+                                        <span className={`text-xs font-bold px-2.5 py-2 rounded ${isSelectable && isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-200/80 text-slate-700'
                                             }`}>
                                             {primaryHouse || '—'}
                                         </span>
                                         <div className="flex-1 gap-1 text-left">
                                             <div className="truncate pl-2 font-semibold">
-                                                {ownerObj.owner}
+                                                {ownerObj.ownerName}
                                             </div>
-                                            <div className={`text-xs truncate pl-2 ${isSelected ? 'text-white/60' : 'text-slate-500'}`}>
-                                                {ownerObj.locality}
+                                            <div className={`text-xs truncate pl-2 ${isSelectable && isSelected ? 'text-white/60' : 'text-slate-500'}`}>
+                                                {ownerObj.ownerOrigin}
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +73,7 @@ export default function OwnersSidebar({ titleText, owners, selectedOwner, onSele
                             );
                         })) : (
                         <div className="text-center py-8 text-sm text-slate-400 font-medium">
-                            {t('lishchovateMap.sidebar.searchNotFound')}
+                            {t('sidebar.searchNotFound')}
                         </div>
                     )}
                 </div>

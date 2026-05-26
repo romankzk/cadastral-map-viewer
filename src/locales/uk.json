@@ -19,20 +19,19 @@
             "openBtn": "Відкрити карту"
         },
         "footer": "Карти та дані опрацьовано на основі оригінальних кадастрових карт з ЦДІАЛ та AP Przemyśl."
-        
+    },
+    "sidebar": {
+        "searchPlaceholder": "Пошук власника...",
+        "searchNotFound": "Власників не знайдено"
     },
     "lishchovateMap": {
         "documentTitle": "Ліщовате - Історичні кадастрові карти",
-        "sidebar": {
-            "title": "Карта села Ліщовате",
-            "searchPlaceholder": "Пошук власника...",
-            "searchNotFound": "Власників не знайдено"
-        },
+        "sidebarTitle": "Карта села Ліщовате",
         "map": {
             "opacityLabel": "Прозорість",
             "layerControl": {
                 "osm": "OpenStreetMap",
-                "sattelite": "Супутникова карта",
+                "satellite": "Супутникова карта",
                 "cadastral": "Карта 1855 р.",
                 "parcels": "Інтерактивні ділянки"
             }
@@ -40,7 +39,8 @@
     },
     "perehnoivMap": {
         "documentTitle": "Перегноїв - Історичні кадастрові карти",
-        "title": "Перегноїв"
+        "title": "Перегноїв",
+        "sidebarTitle": "Карта села Перегноїв"
     },
     "comingSoon": {
         "inDevelopmentLabel": "Карта в розробці",

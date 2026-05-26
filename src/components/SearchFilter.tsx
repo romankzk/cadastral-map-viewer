@@ -21,7 +21,7 @@ export default function SearchFilter({ value, onChange }: SearchFilterProps) {
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder={t('lishchovateMap.sidebar.searchPlaceholder')}
+          placeholder={t('sidebar.searchPlaceholder')}
           className="w-full pl-9 pr-8 py-1.5 text-sm bg-slate-100 focus:bg-white text-slate-800 placeholder-slate-400 rounded-md border border-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-150"
         />
 

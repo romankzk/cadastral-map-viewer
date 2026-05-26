@@ -4,8 +4,8 @@ import { GeoJSON } from 'react-leaflet/GeoJSON'
 import { useState } from "react";
 import OpacitySlider from "../components/OpacitySlider";
 import { ParcelStyles } from "../types/constants";
-import type { OwnerInfo } from "../types";
-import { useGeojsonData } from "../hooks/useGeojsonData";
+import type { Owner } from "../types";
+import { useParcelsData } from "../hooks/useParcelsData";
 import { getFeatureStyle } from "../utils/style-utils";
 import type { LatLngBoundsExpression, Layer } from "leaflet";
 import type { Feature } from 'geojson';
@@ -14,14 +14,16 @@ import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { useOwnersData } from "../hooks/useOwnersData";
 
 export default function LishchovateMap() {
     const { t, i18n } = useTranslation();
     useDocumentTitle(t('lishchovateMap.documentTitle'));
-    
+
     const [opacity, setOpacity] = useState(0.75);
-    const { data, owners } = useGeojsonData();
-    const [selectedOwner, setSelectedOwner] = useState<OwnerInfo | null>(null);
+    const { data: parcels } = useParcelsData('leszczowate-parcels.geojson');
+    const { owners } = useOwnersData('leszczowate-parcels.geojson', true);
+    const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const mapCenter: [number, number] = [49.49888, 22.56085];
@@ -48,9 +50,9 @@ export default function LishchovateMap() {
 
         if (
             selectedOwner &&
-            currentFeatureOwner === selectedOwner.owner &&
+            currentFeatureOwner === selectedOwner.ownerName &&
             featureHouseInt &&
-            selectedOwner.houseNumbers.includes(featureHouseInt)
+            selectedOwner.houseNumber === featureHouseInt
         ) {
             return ParcelStyles.selected;
         }
@@ -66,7 +68,7 @@ export default function LishchovateMap() {
         layer.on({
             click: () => {
                 if (ownerName && houseNum) {
-                    const matchingOwner = owners.find(o => o.owner === ownerName && o.houseNumbers.includes(houseNum));
+                    const matchingOwner = owners.find(o => o.ownerName === ownerName && o.houseNumber === houseNum);
 
                     if (matchingOwner) {
                         setSelectedOwner(matchingOwner);
@@ -88,9 +90,9 @@ export default function LishchovateMap() {
 
                 if (
                     selectedOwner &&
-                    currentOwner === selectedOwner.owner &&
+                    currentOwner === selectedOwner.ownerName &&
                     currentHouseInt &&
-                    selectedOwner.houseNumbers.includes(currentHouseInt)
+                    selectedOwner.houseNumber === currentHouseInt
                 ) {
                     return;
                 }
@@ -102,8 +104,9 @@ export default function LishchovateMap() {
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
             <OwnersSidebar
-                titleText={t('lishchovateMap.sidebar.title')}
+                titleText={t('lishchovateMap.sidebarTitle')}
                 owners={owners}
+                isSelectable={true}
                 selectedOwner={selectedOwner}
                 onSelectOwner={(owner) => setSelectedOwner(owner)}
                 isCollapsed={isCollapsed}
@@ -111,8 +114,8 @@ export default function LishchovateMap() {
             />
 
             <div className="relative flex-1 min-w-0 h-full bg-slate-100">
-                {/* Expand/collapse sidebar button */}
                 <div className="absolute inset-0 w-full h-full">
+                    {/* Expand/collapse sidebar button */}
                     <button
                         onClick={handleCollapsedChange}
                         className="absolute z-1000 left-5 top-5 rounded-lg bg-white text-slate-700 p-2 shadow-lg border border-slate-100 transition-colors shadow-md cursor-pointer"
@@ -148,7 +151,7 @@ export default function LishchovateMap() {
                                 />
                             </LayersControl.BaseLayer>
 
-                            <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.sattelite')}>
+                            <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.satellite')}>
                                 <TileLayer
                                     url="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                                 />
@@ -164,10 +167,10 @@ export default function LishchovateMap() {
                                 />
                             </LayersControl.Overlay>
 
-                            {data && (
+                            {parcels && (
                                 <LayersControl.Overlay checked name={t('lishchovateMap.map.layerControl.parcels')}>
                                     <GeoJSON
-                                        data={data}
+                                        data={parcels}
                                         onEachFeature={onEachParcel}
                                         style={(feature) => onFeatureStyle(feature)}
                                         key={selectedOwner ? `highlight-${selectedOwner.id}` : 'default'}

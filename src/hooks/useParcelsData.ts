@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import type { OwnerInfo } from "../types";
 import type { Feature } from 'geojson';
 
-export function useGeojsonData() {
+export function useParcelsData(filename: string) {
     const [data, setData] = useState(null);
     const [owners, setOwners] = useState<OwnerInfo[]>([]);
-    const fetchUrl = `${import.meta.env.BASE_URL}data/parcels.geojson`;
+    const fetchUrl = `${import.meta.env.BASE_URL}data/${filename}`;
 
     useEffect(() => {
         fetch(fetchUrl)
