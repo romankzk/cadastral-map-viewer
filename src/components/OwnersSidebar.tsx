@@ -22,7 +22,7 @@ export default function OwnersSidebar({ titleText, owners, isSelectable = true, 
 
     return (
         <>
-            <aside className={`fixed md:relative left-0 top-0 w-80 h-full bg-slate-50 border-r border-slate-200 p-6 flex flex-col gap-4 z-500 shrink-0 overflow-y-auto 
+            <aside className={`fixed md:relative left-0 bottom-0 md:top-0 w-full md:w-80 h-[50vh] md:h-full bg-slate-50 border-r border-slate-200 p-6 flex flex-col gap-4 z-500 shrink-0 overflow-y-auto 
                 ${isCollapsed
                     ? '-translate-x-full md:w-0 md:overflow-hidden md:p-0 md:border-none'
                     : 'translate-x-0'}`}
