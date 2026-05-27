@@ -16,6 +16,12 @@
                 "description": "Wieś należała dawniej do rodziny Kraińskich, w granicach historycznego powiatu sanockiego. Mapa oparta na szkicu indykacyjnym z 1852 roku oraz mapie ostatecznej (ok. 1855) z Archiwum Państwowego w Przemyślu. - Archiwum Geodezyjne. - Leszczowate. - sygn. 3 (56/126/0/649/3) oraz sygn. 0896M (56/126/0/-/0896M)",
                 "date": "1852-1855"
             },
+            "doshno": {
+                "title": "Deszno",
+                "region": "Rymanów-Zdrój, powiat krosneński, województwo podkarpackie",
+                "description": "",
+                "date": "1854"
+            },
             "openBtn": "Otwórz mapę"
         },
         "footer": "Mapy i dane opracowano w oparciu o oryginalne operaty katastralne pochodzące z CDIAL oraz AP Przemyśl."
@@ -50,6 +56,11 @@
         "documentTitle": "Przegnojów - Historyczne mapy katastralne",
         "title": "Przegnojów",
         "sidebarTitle": "Mapa wsi Przegnojów"
+    },
+    "doshnoMap": {
+        "documentTitle": "Deszno - Historyczne mapy katastralne",
+        "title": "Deszno",
+        "sidebarTitle": "Mapa wsi Deszno"
     },
     "comingSoon": {
         "inDevelopmentLabel": "Mapa w trakcie opracowywania",

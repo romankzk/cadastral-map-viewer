@@ -12,9 +12,15 @@
             },
             "lishchovate": {
                 "title": "Leszczowate (and Wola Maćkowa)",
-                "region": "Bieszczady County, Subcarpathian voivodeship",
+                "region": "Bieszczady County, Subcarpathian Voivodeship",
                 "description": "Historically, the village was owned by the Kraiński family, within the boundaries of the historical Sanok Kreis. The map is based on an indication sketch from 1852 and the final map (undated, circa 1855) from the State Archive in Przemyśl - Archiwum Geodezyjne. - Leszczowate. - sygn. 3 (56/126/0/649/3) and sygn. 0896M (56/126/0/-/0896M)",
                 "date": "1852-1855"
+            },
+            "doshno": {
+                "title": "Deszno",
+                "region": "Rymanów-Zdrój, Krosno County, Subcarpathian Voivodeship",
+                "description": "",
+                "date": "1854"
             },
             "openBtn": "Open map"
         },
@@ -50,6 +56,11 @@
         "documentTitle": "Perehnoiv - Historical Cadastral Maps",
         "title": "Perehnoiv",
         "sidebarTitle": "Perehnoiv Map"
+    },
+    "doshnoMap": {
+        "documentTitle": "Deszno - Historical Cadastral Maps",
+        "title": "Deszno",
+        "sidebarTitle": "Deszno Map"
     },
     "comingSoon": {
         "inDevelopmentLabel": "Map under construction",

@@ -29,11 +29,18 @@ export default function Home() {
             region: t('home.cards.perehnoiv.region'),
             date: t('home.cards.perehnoiv.date'),
             description: t('home.cards.perehnoiv.description')
-        }
+        },
+        {
+            slug: 'doshno',
+            title: t('home.cards.doshno.title'),
+            region: t('home.cards.doshno.region'),
+            date: t('home.cards.doshno.date'),
+            description: t('home.cards.doshno.description')
+        },
     ];
 
     return (
-        <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 py-12">
             {/* Platform Header */}
             <header className="text-center mb-12">
                 <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
@@ -46,7 +53,7 @@ export default function Home() {
             </header>
 
             {/* Grid Selection */}
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-3">
                 {FeaturedMaps.map((village) => (
                     <div
                         key={village.slug}
