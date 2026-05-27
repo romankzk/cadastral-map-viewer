@@ -12,7 +12,7 @@ export default function PerehnoivMap() {
     const { t } = useTranslation();
     useDocumentTitle(t('perehnoivMap.documentTitle'));
 
-    const { owners } = useOwnersData('perehnoiv-owners.json', false);
+    const { owners } = useOwnersData('perehnoiv/owners.json', false);
     const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
     const { isCollapsed, handleCollapsedChange } = useSidebar();
 

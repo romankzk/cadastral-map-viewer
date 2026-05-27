@@ -17,11 +17,11 @@ import LeafletMap from "../components/LeafletMap";
 import { useSidebar } from "../hooks/useSidebar";
 
 export default function LishchovateMap() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     useDocumentTitle(t('lishchovateMap.documentTitle'));
 
-    const { data: parcels } = useParcelsData('leszczowate-parcels.geojson');
-    const { owners } = useOwnersData('leszczowate-parcels.geojson', true);
+    const { data: parcels } = useParcelsData('leszczowate/parcels.geojson');
+    const { owners } = useOwnersData('leszczowate/parcels.geojson', true);
     const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
 
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
@@ -29,8 +29,8 @@ export default function LishchovateMap() {
     
     // Style each feature on init
     const onFeatureStyle = (feature: Feature | undefined) => {
-        const currentFeatureHouse = feature?.properties?.house_number || feature?.properties?.houseNum;
-        const currentFeatureOwner = feature?.properties?.owner?.trim();
+        const currentFeatureHouse = feature?.properties?.house_number;
+        const currentFeatureOwner = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
         const featureHouseInt = currentFeatureHouse ? parseInt(currentFeatureHouse, 10) : null;
         const currentFeatureType = feature?.properties?.type;
 
@@ -47,9 +47,9 @@ export default function LishchovateMap() {
 
     // Event handlers for parcels
     const onEachParcel = (feature: Feature, layer: Layer) => {
-        const rawHouseNum = feature.properties?.house_number || feature.properties?.houseNum;
+        const rawHouseNum = feature.properties?.house_number;
         const houseNum = rawHouseNum ? parseInt(rawHouseNum, 10) : null;
-        const ownerName = feature.properties?.owner?.trim();
+        const ownerName = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
 
         layer.on({
             click: () => {
@@ -70,8 +70,8 @@ export default function LishchovateMap() {
                 e.target.setStyle(ParcelStyles.hover);
             },
             mouseout: (e) => {
-                const currentOwner = feature.properties?.owner?.trim();
-                const currentHouse = feature.properties?.house_number || feature.properties?.houseNum;
+                const currentOwner = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
+                const currentHouse = feature.properties?.house_number;
                 const currentHouseInt = currentHouse ? parseInt(currentHouse, 10) : null;
 
                 if (

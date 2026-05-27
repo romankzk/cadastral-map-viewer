@@ -12,7 +12,7 @@ export default function DesznoMap() {
     const { t } = useTranslation();
     useDocumentTitle(t('doshnoMap.documentTitle'));
 
-    const { owners } = useOwnersData('deszno-owners.json', false);
+    const { owners } = useOwnersData('deszno/owners.json', false);
     const { isModalOpen, modalData, handleModalClose, handleModalOpen } = useOwnerModal();
     const { isCollapsed, handleCollapsedChange } = useSidebar();
 
