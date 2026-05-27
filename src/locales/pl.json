@@ -7,13 +7,15 @@
             "perehnoiv": {
                 "title": "Przegnojów",
                 "region": "Gliniany (hromada), obwód lwowski",
-                "description": "Historycznie wieś należała do starostwa gliniańskiego, późniejszego cyrkułu złoczowskiego. Mapa ostateczna oraz powiązane operaty opisowe znajdują się w CDIAL: zesp. 186, inw. 6, sygn. 886 oraz zesp. 186, inw. 1, sygn. 2426–2428.",
-                "date": "1845"
+                "description": "Historycznie wieś należała do starostwa gliniańskiego, późniejszego cyrkułu złoczowskiego. Mapa ostateczna oraz powiązane operaty opisowe znajdują się w CDIAL.",
+                "date": "1845",
+                "source1": "CDIAL. - zesp. 186, inw. 6, sygn. 886",
+                "source2": "CDIAL. - zesp. 186, inw. 1, sygn. 2426–2428"
             },
             "lishchovate": {
                 "title": "Leszczowate (z Wolą Maćkową)",
                 "region": "Powiat bieszczadzki, województwo podkarpackie",
-                "description": "Wieś należała dawniej do rodziny Kraińskich, w granicach historycznego powiatu sanockiego. Mapa oparta na szkicu indykacyjnym z 1852 roku oraz mapie ostatecznej (ok. 1855) z Archiwum Państwowego w Przemyślu. - Archiwum Geodezyjne. - Leszczowate. - sygn. 3 (56/126/0/649/3) oraz sygn. 0896M (56/126/0/-/0896M)",
+                "description": "Wieś należała dawniej do rodziny Kraińskich, w granicach historycznego powiatu sanockiego. Mapa oparta na szkicu indykacyjnym z 1852 roku oraz mapie ostatecznej (ok. 1855) z Archiwum Państwowego w Przemyślu.",
                 "date": "1852-1855"
             },
             "doshno": {
@@ -22,7 +24,8 @@
                 "description": "",
                 "date": "1854"
             },
-            "openBtn": "Otwórz mapę"
+            "openBtn": "Otwórz mapę",
+            "sourcesText": "Źródła"
         },
         "footer": "Mapy i dane opracowano w oparciu o oryginalne operaty katastralne pochodzące z CDIAL oraz AP Przemyśl."
     },

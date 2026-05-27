@@ -1,6 +1,6 @@
 import { LayersControl, MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { PanelBottomClose, PanelBottomOpen, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import OpacitySlider from "./OpacitySlider";
 import { useState } from "react";
@@ -13,7 +13,7 @@ interface LeafletMapProps {
         isCollapsed: boolean
         onCollapseChange: () => void
     },
-    tileLayer? :{
+    tileLayer?: {
         name: string,
         url: string
     },
@@ -33,15 +33,18 @@ export default function LeafletMap({
     const [opacity, setOpacity] = useState(0.75);
 
     return (
-        <div className="relative flex-1 min-w-0 h-full bg-slate-100">
-            
+        <div className={`relative flex-1 min-w-0 ${sidebarState.isCollapsed ? `h-full` : `h-[50vh]`} md:h-full bg-slate-100`}>
+
             <div className="absolute inset-0 w-full h-full">
                 {/* Expand/collapse sidebar button */}
                 <button
                     onClick={sidebarState.onCollapseChange}
                     className="absolute z-1000 left-5 top-5 rounded-lg bg-white text-slate-700 p-2 shadow-lg border border-slate-100 transition-colors shadow-md cursor-pointer"
                 >
-                    {sidebarState.isCollapsed ? (<PanelLeftOpen size={20} />) : (<PanelLeftClose size={20} />)}
+                    {sidebarState.isCollapsed
+                        ? (<PanelLeftOpen size={20} className="hidden md:block" />) : (<PanelLeftClose size={20} className="hidden md:block" />)}
+                    {sidebarState.isCollapsed
+                        ? (<PanelBottomOpen size={20} className="block md:hidden" />) : (<PanelBottomClose size={20} className="block md:hidden" />)}
 
                 </button>
 
@@ -101,7 +104,7 @@ export default function LeafletMap({
                         )}
                     </LayersControl>
 
-                    
+
                 </MapContainer>
             </div>
         </div>

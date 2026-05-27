@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 interface VillageCard {
     slug: string;
@@ -9,6 +10,10 @@ interface VillageCard {
     region: string;
     date: string;
     description: string;
+    sources?: {
+        text: string,
+        link?: string
+    }[]
 }
 
 export default function Home() {
@@ -21,22 +26,33 @@ export default function Home() {
             title: t('home.cards.lishchovate.title'),
             region: t('home.cards.lishchovate.region'),
             date: t('home.cards.lishchovate.date'),
-            description: t('home.cards.lishchovate.description')
-        },
-        {
-            slug: 'perehnoiv',
-            title: t('home.cards.perehnoiv.title'),
-            region: t('home.cards.perehnoiv.region'),
-            date: t('home.cards.perehnoiv.date'),
-            description: t('home.cards.perehnoiv.description')
+            description: t('home.cards.lishchovate.description'),
+            sources: [
+                { text: "APP - Archiwum Geodezyjne. - Leszczowate. - sygn. 3", link: "https://www.szukajwarchiwach.gov.pl/en/jednostka/-/jednostka/27137468" },
+                { text: "APP - Archiwum Geodezyjne. - sygn. 0896M" }
+            ]
         },
         {
             slug: 'doshno',
             title: t('home.cards.doshno.title'),
             region: t('home.cards.doshno.region'),
             date: t('home.cards.doshno.date'),
-            description: t('home.cards.doshno.description')
+            description: t('home.cards.doshno.description'),
+            sources: [
+                { text: "APP - Archiwum Geodezyjne. - Deszno. - sygn. 1-10", link: "https://www.szukajwarchiwach.gov.pl/en/seria?p_p_id=Seria&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_Seria_nameofjsp=jednostki&_Seria_id_serii=718365" }
+            ]
         },
+        {
+            slug: 'perehnoiv',
+            title: t('home.cards.perehnoiv.title'),
+            region: t('home.cards.perehnoiv.region'),
+            date: t('home.cards.perehnoiv.date'),
+            description: t('home.cards.perehnoiv.description'),
+            sources:  [
+                { text: t('home.cards.perehnoiv.source1') },
+                { text: t('home.cards.perehnoiv.source2') }
+            ]
+        }
     ];
 
     return (
@@ -78,6 +94,26 @@ export default function Home() {
                             <p className="text-sm text-slate-600 leading-relaxed">
                                 {village.description}
                             </p>
+
+                            {village.sources && (
+                                <div className="text-sm text-slate-600 leading-relaxed mt-2">
+                                    <span>{t('home.cards.sourcesText')}:</span>
+                                    <ul className="text-xs list-disc ml-4">
+                                        {village.sources.map(source => {
+                                            if (!source.link) {
+                                                return (
+                                                    <li>{source.text}</li>
+                                                )
+                                            }
+                                            else return (
+                                                <li><a href={source.link} className="text-blue-500 flex items-center gap-1">
+                                                    {source.text}
+                                                    <SquareArrowOutUpRight size={10} />
+                                                </a></li>)
+                                        })}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
 
                         <div className="mt-3 pt-4 border-t border-slate-100">
@@ -94,7 +130,7 @@ export default function Home() {
                     </div>
                 ))}
             </div>
-            
+
             {/* Footer Info Note */}
             <footer className="mt-8 text-center text-xs text-slate-400 font-medium">
                 {t('home.footer')}
