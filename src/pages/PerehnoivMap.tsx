@@ -35,6 +35,10 @@ export default function PerehnoivMap() {
                     isCollapsed: isCollapsed,
                     onCollapseChange: handleCollapsedChange
                 }}
+                tileLayer={{
+                    name: t('perehnoivMap.map.layerControl.cadastral'),
+                    url: "https://romankzk.github.io/map-tiles-perehnoiv/tiles/{z}/{x}/{y}.png"
+                }}
             />
 
             {/* Owner Details Modal */}

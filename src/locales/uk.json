@@ -59,7 +59,16 @@
     "perehnoivMap": {
         "documentTitle": "Перегноїв - Історичні кадастрові карти",
         "title": "Перегноїв",
-        "sidebarTitle": "Карта села Перегноїв"
+        "sidebarTitle": "Карта села Перегноїв",
+        "map": {
+            "opacityLabel": "Прозорість",
+            "layerControl": {
+                "osm": "OpenStreetMap",
+                "satellite": "Супутникова карта",
+                "cadastral": "Карта 1845 р.",
+                "parcels": "Інтерактивні ділянки"
+            }
+        }
     },
     "doshnoMap": {
         "documentTitle": "Дошно - Історичні кадастрові карти",

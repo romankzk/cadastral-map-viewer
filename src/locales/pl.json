@@ -58,7 +58,16 @@
     "perehnoivMap": {
         "documentTitle": "Przegnojów - Historyczne mapy katastralne",
         "title": "Przegnojów",
-        "sidebarTitle": "Mapa wsi Przegnojów"
+        "sidebarTitle": "Mapa wsi Przegnojów",
+        "map": {
+            "opacityLabel": "Przezroczystość",
+            "layerControl": {
+                "osm": "OpenStreetMap",
+                "satellite": "Mapa satelitarna",
+                "cadastral": "Mapa z 1845 r.",
+                "parcels": "Interaktywne parcele"
+            }
+        }
     },
     "doshnoMap": {
         "documentTitle": "Deszno - Historyczne mapy katastralne",

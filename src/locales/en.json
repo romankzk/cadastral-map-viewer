@@ -58,7 +58,16 @@
     "perehnoivMap": {
         "documentTitle": "Perehnoiv - Historical Cadastral Maps",
         "title": "Perehnoiv",
-        "sidebarTitle": "Perehnoiv Map"
+        "sidebarTitle": "Perehnoiv Map",
+        "map": {
+            "opacityLabel": "Opacity",
+            "layerControl": {
+                "osm": "OpenStreetMap",
+                "satellite": "Satellite Map",
+                "cadastral": "1845 Map",
+                "parcels": "Interactive Parcels"
+            }
+        }
     },
     "doshnoMap": {
         "documentTitle": "Deszno - Historical Cadastral Maps",
