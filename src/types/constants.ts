@@ -53,7 +53,7 @@ export type MapConfig = {
 
 export const MapConfig: Record<string, MapConfig> = {
     Perehnoiv: {
-        center: [49.80731, 24.57350],
+        center: [49.81921, 24.58419],
         zoom: 14,
         bounds: [
             [49.74678, 24.46878], // South-West corner
