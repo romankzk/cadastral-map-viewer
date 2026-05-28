@@ -7,7 +7,7 @@ import { useParcelsData } from "../hooks/useParcelsData";
 import { getFeatureStyle } from "../utils/style-utils";
 import type { Layer } from "leaflet";
 import type { Feature } from 'geojson';
-import OwnersSidebar from "../components/OwnersSidebar";
+import OwnersSidebar from "../components/Sidebar";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { useTranslation } from "react-i18next";
 import { useOwnersData } from "../hooks/useOwnersData";

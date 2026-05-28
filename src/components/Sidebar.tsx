@@ -16,7 +16,7 @@ interface OwnersSidebarProps {
     onDetailsClick?: (ownerData: Owner) => void
 }
 
-export default function OwnersSidebar({ titleText, owners, isSelectable = true, selectedOwner, onSelectOwner, isCollapsed, onDetailsClick }: OwnersSidebarProps) {
+export default function Sidebar({ titleText, owners, isSelectable = true, selectedOwner, onSelectOwner, isCollapsed, onDetailsClick }: OwnersSidebarProps) {
     const { searchTerm, setSearchTerm, filteredOwners } = useOwnerSearch(owners);
     const { t } = useTranslation();
 
@@ -42,10 +42,16 @@ export default function OwnersSidebar({ titleText, owners, isSelectable = true, 
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
                     {filteredOwners.length > 0 ? (
                         filteredOwners.map((ownerObj) => {
-                            const isSelected = isSelectable ? selectedOwner?.id === ownerObj.id : false;
+                            let isSelected = false;
+                            if (isSelectable) {
+                                isSelected = selectedOwner?.id
+                                    ? selectedOwner?.id === ownerObj.id
+                                    : (selectedOwner?.orderNumber === ownerObj.orderNumber) && (selectedOwner?.houseNumber === ownerObj.houseNumber);
+                            }
 
                             return (
                                 <OwnerRow
+                                    key={ownerObj.id}
                                     owner={ownerObj}
                                     isSelectable={isSelectable}
                                     isSelected={isSelected}
@@ -96,7 +102,7 @@ function OwnerRow({ owner, isSelectable, isSelected, onRowSelect, onDetailsClick
                         {owner.ownerOrigin}
                     </div>
                 </div>
-                
+
                 <button
                     onClick={onDetailsClick ? (e) => {
                         e.stopPropagation();

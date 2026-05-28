@@ -5,35 +5,63 @@ export const Colors = {
     Red100: "#fee2e2",
     Amber500: "#f59e0b",
     Blue500: "#3b82f6",
+    Cyan300: "#67e8f9",
+    Green300: "#86efac"
+}
+
+const baseParcelStyle = {
+    color: Colors.Red500,
+    weight: 1,
+    fillColor: Colors.Red500,
+    fillOpacity: 0.15
 }
 
 export const ParcelStyles: Record<string, PathOptions> = {
-    default: {
-        color: Colors.Red500,
-        weight: 1,
-        fillColor: Colors.Red500,
-        fillOpacity: 0.15
-    },
+    default: baseParcelStyle,
     building: {
-        color: Colors.Red500,
-        weight: 1.5,
+        ...baseParcelStyle,
         fillColor: Colors.Amber500,
         fillOpacity: 0.5
     },
     yard: {
-        color: Colors.Red500,
-        weight: 1,
+        ...baseParcelStyle,
         fillColor: Colors.Red100,
         fillOpacity: 0.5
     },
     household: {
-        color: Colors.Red500,
-        weight: 1,
-        fillColor: Colors.Red500,
+        ...baseParcelStyle,
         fillOpacity: 0.4
     },
+    garden: {
+        ...baseParcelStyle,
+        fillOpacity: 0.4
+    },
+    orchard: {
+        ...baseParcelStyle,
+        fillOpacity: 0.4
+    },
+    pasture: {
+        ...baseParcelStyle,
+        fillColor: Colors.Green300,
+        fillOpacity: 0.2
+    },
+    common_pasture: {
+        ...baseParcelStyle,
+        fillColor: Colors.Green300,
+        fillOpacity: 0.2
+    },
+    wetland: {
+        ...baseParcelStyle,
+        fillColor: Colors.Green300,
+        fillOpacity: 0.2
+    },
+    water: {
+        ...baseParcelStyle,
+        fillColor: Colors.Cyan300,
+        fillOpacity: 0.15
+    },
     selected: {
-        color: Colors.Red500,
+        ...baseParcelStyle,
         weight: 2.5,
         fillColor: Colors.Blue500,
         fillOpacity: 0.5

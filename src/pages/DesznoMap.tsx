@@ -1,5 +1,5 @@
 import LeafletMap from "../components/LeafletMap";
-import OwnersSidebar from "../components/OwnersSidebar";
+import OwnersSidebar from "../components/Sidebar";
 import { useOwnerModal } from "../hooks/useOwnerModal";
 import { useOwnersData } from "../hooks/useOwnersData";
 import { MapConfig } from "../types/constants";
