@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { SquareArrowOutUpRight } from 'lucide-react';
 import BaseLanguageControl from '../components/BaseLanguageControl';
