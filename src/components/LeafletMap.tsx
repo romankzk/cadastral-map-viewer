@@ -58,9 +58,7 @@ export default function LeafletMap({
                 </button>
 
                 {/* Language Switch button */}
-                <div className="absolute z-1000 left-20 top-5 rounded-lg bg-white shadow-lg border border-slate-100 p-1.5 transition-colors">
-                    <LanguageSwitcher />
-                </div>
+                <LanguageSwitcher />
 
                 {/* Opacity Control */}
                 {tileLayer && isTileVisible && (
@@ -83,7 +81,7 @@ export default function LeafletMap({
                     <LayerStateTracker onVisibilityChange={handleLayerToggle} />
 
                     <ZoomControl position="bottomright" />
-                    <LayersControl position="topright" collapsed={false} key={i18n.language}>
+                    <LayersControl position="topright" collapsed={true} key={i18n.language}>
 
                         <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.osm')}>
                             <TileLayer
