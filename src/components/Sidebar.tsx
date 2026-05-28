@@ -22,10 +22,10 @@ export default function Sidebar({ titleText, owners, isSelectable = true, select
 
     return (
         <>
-            <aside className={`fixed md:relative left-0 bottom-0 md:top-0 w-full md:w-80 h-[50vh] md:h-full bg-slate-50 border-r border-slate-200 p-6 flex flex-col gap-4 z-500 shrink-0 overflow-y-auto 
+            <aside className={`fixed md:relative left-0 bottom-0 md:top-0 h-[50vh] md:h-full bg-slate-50 border-slate-200 flex flex-col gap-4 z-500 shrink-0 overflow-y-auto
                 ${isCollapsed
-                    ? '-translate-x-full md:w-0 md:overflow-hidden md:p-0 md:border-none'
-                    : 'translate-x-0'}`}
+                    ? '-translate-x-full md:translate-x-0 w-0 md:w-0 p-0 border-none overflow-hidden'
+                    : 'translate-x-0 w-full md:w-80 p-6 border-r'}`}
             >
                 <div className="flex flex-row items-center gap-2">
                     <Link

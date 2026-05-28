@@ -69,7 +69,7 @@ export default function LeafletMap({
 
                 {/* Leaflet Map */}
                 <MapContainer
-                    key={sidebarState.isCollapsed ? 'map-collapsed' : 'map-expanded'}
+                    key={sidebarState.isCollapsed ? 'map-expanded' : 'map-collapsed'}
                     className="w-full h-full"
                     center={mapConfig.center}
                     zoom={mapConfig.zoom}
