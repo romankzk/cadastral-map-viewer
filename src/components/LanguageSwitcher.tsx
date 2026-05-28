@@ -13,7 +13,7 @@ export default function LanguageSwitcher() {
   ];
 
   return (
-    <div className="absolute z-1000 left-5 md:left-20 top-18 md:top-5 flex items-center rounded-lg bg-white shadow-lg border border-slate-100 p-1 transition-all duration-300">
+    <div className="absolute z-1000 left-5 md:left-20 top-18 md:top-5 flex items-center rounded-lg bg-white shadow-lg border border-slate-100 p-1.25 transition-all duration-300">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="md:hidden flex items-center justify-center text-slate-700 rounded p-1 transition-colors cursor-pointer"
@@ -31,7 +31,7 @@ export default function LanguageSwitcher() {
               i18n.changeLanguage(lang.code);
               setIsExpanded(false);
             }}
-            className={`cursor-pointer px-2 py-1 text-xs font-bold rounded border transition-colors whitespace-nowrap ${i18n.language === lang.code
+            className={`cursor-pointer px-1.5 py-1 text-xs font-bold rounded border transition-colors whitespace-nowrap ${i18n.language === lang.code
               ? 'bg-blue-600 text-white border-blue-600'
               : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
               }`}
