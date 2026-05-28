@@ -11,7 +11,6 @@
                 "date": "1845 рік",
                 "source1": "ЦДІАЛ - ф. 186, оп. 6, спр. 886",
                 "source2": "ЦДІАЛ - ф. 186, оп. 6, спр. 2426-2428"
-                
             },
             "lishchovate": {
                 "title": "Ліщовате (з Волею Мацьковою)",
@@ -43,32 +42,27 @@
         "buildParcels": "Будівельних ділянок",
         "landParcels": "Земельних ділянок"
     },
+    "mapControls": {
+        "opacityLabel": "Прозорість",
+        "layerControl": {
+            "osm": "OpenStreetMap",
+            "satellite": "Супутникова карта",
+            "historical": "Історична карта",
+            "parcels": "Інтерактивні ділянки"
+        },
+        "parcelInfo": {
+            "parcelLabel": "Ділянка",
+            "ownerLabel": "Власник"
+        }
+    },
     "lishchovateMap": {
         "documentTitle": "Ліщовате - Історичні кадастрові карти",
-        "sidebarTitle": "Карта села Ліщовате",
-        "map": {
-            "opacityLabel": "Прозорість",
-            "layerControl": {
-                "osm": "OpenStreetMap",
-                "satellite": "Супутникова карта",
-                "cadastral": "Карта 1855 р.",
-                "parcels": "Інтерактивні ділянки"
-            }
-        }
+        "sidebarTitle": "Карта села Ліщовате"
     },
     "perehnoivMap": {
         "documentTitle": "Перегноїв - Історичні кадастрові карти",
         "title": "Перегноїв",
-        "sidebarTitle": "Карта села Перегноїв",
-        "map": {
-            "opacityLabel": "Прозорість",
-            "layerControl": {
-                "osm": "OpenStreetMap",
-                "satellite": "Супутникова карта",
-                "cadastral": "Карта 1845 р.",
-                "parcels": "Інтерактивні ділянки"
-            }
-        }
+        "sidebarTitle": "Карта села Перегноїв"
     },
     "doshnoMap": {
         "documentTitle": "Дошно - Історичні кадастрові карти",

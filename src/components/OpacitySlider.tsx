@@ -7,7 +7,7 @@ export default function OpacitySlider({ opacity, onChange }: { opacity: number, 
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className={`absolute top-32 md:top-20 left-5 z-[1000] flex flex-col gap-2 rounded-lg bg-white shadow-lg border border-slate-100 p-1 transition-all duration-300 ${isExpanded ? 'w-[220px]' : 'w-fit md:w-[220px]'}`}>
+    <div className={`absolute top-28 md:top-20 left-5 z-[1000] flex flex-col gap-2 rounded-lg bg-white shadow-lg border border-slate-100 p-1.25 transition-all duration-300 ${isExpanded ? 'w-[220px]' : 'w-fit md:w-[220px]'}`}>
       <div className="flex items-center justify-between">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
@@ -23,7 +23,7 @@ export default function OpacitySlider({ opacity, onChange }: { opacity: number, 
               htmlFor="opacity-range"
               className="text-sm font-semibold text-slate-700 select-none whitespace-nowrap"
             >
-              {t('lishchovateMap.map.opacityLabel')}
+              {t('mapControls.opacityLabel')}
             </label>
             <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
               {Math.round(opacity * 100)}%

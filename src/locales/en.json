@@ -42,32 +42,27 @@
         "buildParcels": "Building Parcels",
         "landParcels": "Land Parcels"
     },
+    "mapControls": {
+        "opacityLabel": "Opacity",
+        "layerControl": {
+            "osm": "OpenStreetMap",
+            "satellite": "Satellite Map",
+            "historical": "Historical Map",
+            "parcels": "Interactive Parcels"
+        },
+        "parcelInfo": {
+            "parcelLabel": "Parcel",
+            "ownerLabel": "Landowner"
+        }
+    },
     "lishchovateMap": {
         "documentTitle": "Leszczowate - Historical Cadastral Maps",
-        "sidebarTitle": "Leszczowate Map",
-        "map": {
-            "opacityLabel": "Opacity",
-            "layerControl": {
-                "osm": "OpenStreetMap",
-                "satellite": "Satellite Map",
-                "cadastral": "1855 Map",
-                "parcels": "Interactive Parcels"
-            }
-        }
+        "sidebarTitle": "Leszczowate Map"
     },
     "perehnoivMap": {
         "documentTitle": "Perehnoiv - Historical Cadastral Maps",
         "title": "Perehnoiv",
-        "sidebarTitle": "Perehnoiv Map",
-        "map": {
-            "opacityLabel": "Opacity",
-            "layerControl": {
-                "osm": "OpenStreetMap",
-                "satellite": "Satellite Map",
-                "cadastral": "1845 Map",
-                "parcels": "Interactive Parcels"
-            }
-        }
+        "sidebarTitle": "Perehnoiv Map"
     },
     "doshnoMap": {
         "documentTitle": "Deszno - Historical Cadastral Maps",

@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 import { GeoJSON } from 'react-leaflet/GeoJSON'
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { MapConfig, ParcelStyles } from "../types/constants";
 import type { Owner } from "../types";
 import { useParcelsData } from "../hooks/useParcelsData";
@@ -25,28 +25,35 @@ export default function LishchovateMap() {
     const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
 
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
+    const [hoveredParcel, setHoveredParcel] = useState<any>(null);
     const { isCollapsed, handleCollapsedChange } = useSidebar();
     
-    // Style each feature on init
-    const onFeatureStyle = (feature: Feature | undefined) => {
-        const currentFeatureHouse = feature?.properties?.house_number;
+    // Helper to check if a feature's parcel belongs to the currently selected owner
+    const isFeatureSelected = useCallback((feature: Feature | undefined) => {
         const currentFeatureOwner = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
+        const currentFeatureHouse = feature?.properties?.house_number;
         const featureHouseInt = currentFeatureHouse ? parseInt(currentFeatureHouse, 10) : null;
-        const currentFeatureType = feature?.properties?.type;
 
-        if (
+        return (
             selectedOwner &&
             currentFeatureOwner === selectedOwner.ownerName &&
             featureHouseInt &&
             selectedOwner.houseNumber === featureHouseInt
-        ) {
+        );
+    }, [selectedOwner, i18n.language]);
+
+    // Style each feature on init
+    const onFeatureStyle = useCallback((feature: Feature | undefined) => {
+        const currentFeatureType = feature?.properties?.type;
+
+        if (isFeatureSelected(feature)) {
             return ParcelStyles.selected;
         }
         return getFeatureStyle(currentFeatureType);
-    }
+    }, [isFeatureSelected]);
 
     // Event handlers for parcels
-    const onEachParcel = (feature: Feature, layer: Layer) => {
+    const onEachParcel = useCallback((feature: Feature, layer: Layer) => {
         const rawHouseNum = feature.properties?.house_number;
         const houseNum = rawHouseNum ? parseInt(rawHouseNum, 10) : null;
         const ownerName = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
@@ -68,24 +75,30 @@ export default function LishchovateMap() {
             },
             mouseover: (e) => {
                 e.target.setStyle(ParcelStyles.hover);
+                setHoveredParcel(feature.properties);
             },
             mouseout: (e) => {
-                const currentOwner = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
-                const currentHouse = feature.properties?.house_number;
-                const currentHouseInt = currentHouse ? parseInt(currentHouse, 10) : null;
-
-                if (
-                    selectedOwner &&
-                    currentOwner === selectedOwner.ownerName &&
-                    currentHouseInt &&
-                    selectedOwner.houseNumber === currentHouseInt
-                ) {
+                setHoveredParcel(null);
+                if (isFeatureSelected(feature)) {
+                    e.target.setStyle(ParcelStyles.selected);
                     return;
                 }
                 e.target.setStyle(getFeatureStyle(feature.properties?.type));
             }
         });
-    };
+    }, [owners, isFeatureSelected, i18n.language]);
+
+    const geojsonNode = useMemo(() => {
+        if (!parcels) return null;
+        return (
+            <GeoJSON
+                data={parcels}
+                onEachFeature={onEachParcel}
+                style={onFeatureStyle}
+                key={selectedOwner ? `highlight-${selectedOwner.id}` : 'default'}
+            />
+        );
+    }, [parcels, onEachParcel, onFeatureStyle, selectedOwner]);
 
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
@@ -107,19 +120,13 @@ export default function LishchovateMap() {
                     isCollapsed: isCollapsed,
                     onCollapseChange: handleCollapsedChange
                 }}
+                activeParcel={hoveredParcel}
                 geojsonLayer={{
-                    name: t('lishchovateMap.map.layerControl.parcels'),
-                    node: parcels ? (
-                        <GeoJSON
-                            data={parcels}
-                            onEachFeature={onEachParcel}
-                            style={(feature) => onFeatureStyle(feature)}
-                            key={selectedOwner ? `highlight-${selectedOwner.id}` : 'default'}
-                        />
-                    ) : null
+                    name: t('mapControls.layerControl.parcels'),
+                    node: geojsonNode
                 }}
                 tileLayer={{
-                    name: t('lishchovateMap.map.layerControl.cadastral'),
+                    name: t('mapControls.layerControl.historical'),
                     url: "https://romankzk.github.io/map-tiles-leszczowate/tiles-1855/{z}/{x}/{y}.png"
                 }}
             />

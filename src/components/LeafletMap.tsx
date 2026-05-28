@@ -1,11 +1,12 @@
-import { LayersControl, MapContainer, TileLayer, useMapEvents, ZoomControl } from "react-leaflet";
+import { LayersControl, MapContainer, TileLayer, useMap, useMapEvents, ZoomControl } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { PanelBottomClose, PanelBottomOpen, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import OpacitySlider from "./OpacitySlider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { MapConfig } from "../types/constants";
+import ParcelInfoBox from "./ParcelInfoBox";
 
 interface LeafletMapProps {
     mapConfig: MapConfig
@@ -20,14 +21,16 @@ interface LeafletMapProps {
     geojsonLayer?: {
         name: string,
         node: React.ReactNode
-    }
+    },
+    activeParcel?: any
 }
 
 export default function LeafletMap({
     mapConfig,
     sidebarState,
     geojsonLayer,
-    tileLayer
+    tileLayer,
+    activeParcel
 }: LeafletMapProps) {
     const { t, i18n } = useTranslation();
     const [opacity, setOpacity] = useState(0.75);
@@ -40,7 +43,7 @@ export default function LeafletMap({
     };
 
     return (
-        <div className={`relative flex-1 min-w-0 ${sidebarState.isCollapsed ? `h-full` : `h-[50vh]`} md:h-full bg-slate-100`}>
+        <div className={`relative flex-1 min-w-0 ${sidebarState.isCollapsed ? `h-full` : `h-[50vh]`} md:h-full bg-slate-100 transition-all duration-300`}>
 
             <div className="absolute inset-0 w-full h-full">
                 {/* Expand/collapse sidebar button */}
@@ -65,9 +68,11 @@ export default function LeafletMap({
                     <OpacitySlider opacity={opacity} onChange={setOpacity} />
                 )}
 
+                {/* Parcel Info Box */}
+                <ParcelInfoBox activeParcel={activeParcel} />
+
                 {/* Leaflet Map */}
                 <MapContainer
-                    key={sidebarState.isCollapsed ? 'map-expanded' : 'map-collapsed'}
                     className="w-full h-full"
                     center={mapConfig.center}
                     zoom={mapConfig.zoom}
@@ -78,19 +83,20 @@ export default function LeafletMap({
                     preferCanvas={true}
                     zoomControl={false}
                 >
+                    <MapResizer isCollapsed={sidebarState.isCollapsed} />
                     <LayerStateTracker onVisibilityChange={handleLayerToggle} />
 
                     <ZoomControl position="bottomright" />
                     <LayersControl position="topright" collapsed={true} key={i18n.language}>
 
-                        <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.osm')}>
+                        <LayersControl.BaseLayer checked name={t('mapControls.layerControl.osm')}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
                         </LayersControl.BaseLayer>
 
-                        <LayersControl.BaseLayer checked name={t('lishchovateMap.map.layerControl.satellite')}>
+                        <LayersControl.BaseLayer checked name={t('mapControls.layerControl.satellite')}>
                             <TileLayer
                                 url="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                             />
@@ -114,12 +120,22 @@ export default function LeafletMap({
                             </LayersControl.Overlay>
                         )}
                     </LayersControl>
-
-
                 </MapContainer>
             </div>
         </div>
     )
+}
+
+function MapResizer({ isCollapsed }: { isCollapsed: boolean }) {
+    const map = useMap();
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            map.invalidateSize();
+        }, 310);
+        return () => clearTimeout(timer);
+    }, [isCollapsed, map]);
+
+    return null;
 }
 
 function LayerStateTracker({ onVisibilityChange }: { onVisibilityChange: (name: string, isVisible: boolean) => void }) {

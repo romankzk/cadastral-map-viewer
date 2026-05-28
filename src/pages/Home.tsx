@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { SquareArrowOutUpRight } from 'lucide-react';
+import BaseLanguageControl from '../components/BaseLanguageControl';
 
 interface VillageCard {
     slug: string;
@@ -137,7 +138,7 @@ export default function Home() {
             </footer>
 
             <div className="flex flex-col items-center mt-8">
-                <LanguageSwitcher />
+                <BaseLanguageControl />
             </div>
         </div>
     );
