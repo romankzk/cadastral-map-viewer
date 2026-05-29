@@ -70,5 +70,16 @@
         "description": "Aktualnie zajmujemy się przetwarzaniem archiwalnych map katastralnych, kalibracją współrzędnych i weryfikacją list historycznych właścicieli działek.",
         "comingSoon": "Planujemy opublikować ją w niedalekiej przyszłości.",
         "backBtn": "Powrót do strony głównej"
+    },
+    "landCategories": {
+        "garden": "ogród",
+        "pasture": "łąka",
+        "common_pasture": "pastwisko",
+        "building": "budynek",
+        "yard": "podwórze",
+        "field": "rola",
+        "water": "rzeka / staw",
+        "orchard": "sad",
+        "household": "zagroda"
     }
 }

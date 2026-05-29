@@ -15,25 +15,26 @@ interface ParcelInfoBoxProps {
     } | null;
 }
 
-const ParcelTypes = {
-    garden: "город",
-    pasture: "сіножать / лука",
-    common_pasture: "пасовище",
-    building: "будівля",
-    yard: "подвір'я",
-    field: "поле",
-    water: "ріка / став",
-    orchard: "сад"
-} as const;
-
 export default function ParcelInfoBox({ activeParcel }: ParcelInfoBoxProps) {
     const { t, i18n } = useTranslation();
+
+    const Categories = {
+        garden: t("landCategories.garden"),
+        pasture: t("landCategories.pasture"),
+        common_pasture: t("landCategories.commonPasture"),
+        building: t("landCategories.building"),
+        yard: t("landCategories.yard"),
+        field: t("landCategories.field"),
+        water: t("landCategories.water"),
+        orchard: t("landCategories.orchard"),
+        household: t("landCategories.household")
+    } as const;
 
     if (!activeParcel) return null;
 
     const ownerName = activeParcel.ownerName || (i18n.language === 'uk' ? activeParcel.owner_uk : activeParcel.owner_pl);
     const parcelNum = activeParcel.parcel_number;
-    const category = activeParcel.land_category;
+    const category = activeParcel.land_category || activeParcel.type;
     const houseNum = activeParcel.houseNumber || activeParcel.house_number;
 
     return (
@@ -59,23 +60,41 @@ export default function ParcelInfoBox({ activeParcel }: ParcelInfoBoxProps) {
                             {category && (
                                 <div className="text-xs uppercase tracking-wider font-semibold text-slate-400">
                                     {
-                                        (category in ParcelTypes)
-                                            ? ParcelTypes[category as keyof typeof ParcelTypes]
+                                        (category in Categories)
+                                            ? Categories[category as keyof typeof Categories]
                                             : category
                                     }
                                 </div>
                             )}
                         </div>
                     </div>) : (
-                    <div className="text-lg font-bold text-slate-800">
-                         {t('mapControls.parcelInfo.parcelLabel')}
+                    <div className="flex flex-col gap-0">
+                        <div className="text-lg font-bold text-slate-800">
+                            {t('mapControls.parcelInfo.parcelLabel')}
+                        </div>
+                        {category != null && (
+                            <div className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                                {
+                                    category === null
+                                        ? t("landCategories.field")
+                                        : (category in Categories)
+                                            ? Categories[category as keyof typeof Categories]
+                                            : category
+                                }
+                            </div>
+                        )}
+                        {category === null && (
+                            <div className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                                {t("landCategories.field")}
+                            </div>
+                        )}
                     </div>
                 )}
 
                 {ownerName && (
                     <div className="flex flex-col gap-2 border-t border-slate-100 pt-2">
                         <div className="text-xs uppercase tracking-wider font-bold text-slate-400">
-                             {t('mapControls.parcelInfo.ownerLabel')}
+                            {t('mapControls.parcelInfo.ownerLabel')}
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100/80 text-slate-700 uppercase">

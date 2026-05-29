@@ -74,5 +74,16 @@
         "description": "We are actively working on processing archival cadastral maps, georeferencing coordinates, and verifying the lists of historical landowners.",
         "comingSoon": "Coming soon.",
         "backBtn": "Back to Home"
+    },
+    "landCategories": {
+        "garden": "garden",
+        "pasture": "pasture",
+        "commonPasture": "common pasture",
+        "building": "building",
+        "yard": "yard",
+        "field": "field",
+        "water": "river / pond",
+        "orchard": "orchard",
+        "household": "household"
     }
 }

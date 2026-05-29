@@ -115,7 +115,7 @@ export default function LeafletMap({
                                     url={tileLayer.url}
                                     minZoom={12}
                                     maxZoom={20}
-                                    maxNativeZoom={22} // Extrapolates pixels up to zoom 22 if tiles stop at 20
+                                    maxNativeZoom={20} // Extrapolates pixels up to zoom 22 if tiles stop at 20
                                     opacity={opacity}
                                 />
                             </LayersControl.Overlay>
