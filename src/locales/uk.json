@@ -29,8 +29,9 @@
         },
         "footer": "Карти та дані опрацьовано на основі оригінальних кадастрових карт з ЦДІАЛ та AP Przemyśl."
     },
+
     "sidebar": {
-        "searchPlaceholder": "Пошук власника...",
+        "searchPlaceholder": "Шукати власника...",
         "searchNotFound": "Власників не знайдено"
     },
     "ownerModal": {
@@ -55,19 +56,20 @@
             "ownerLabel": "Власник"
         }
     },
-    "lishchovateMap": {
-        "documentTitle": "Ліщовате - Історичні кадастрові карти",
-        "sidebarTitle": "Карта села Ліщовате"
-    },
-    "perehnoivMap": {
-        "documentTitle": "Перегноїв - Історичні кадастрові карти",
-        "title": "Перегноїв",
-        "sidebarTitle": "Карта села Перегноїв"
-    },
-    "doshnoMap": {
-        "documentTitle": "Дошно - Історичні кадастрові карти",
-        "title": "Дошно",
-        "sidebarTitle": "Карта села Дошно"
+    
+    "pages": {
+        "leszczowate": {
+            "documentTitle": "Ліщовате - Історичні кадастрові карти",
+            "sidebarTitle": "Карта села Ліщовате"
+        },
+        "perehnoiv": {
+            "documentTitle": "Перегноїв - Історичні кадастрові карти",
+            "sidebarTitle": "Карта села Перегноїв"
+        },
+        "deszno": {
+            "documentTitle": "Дошно - Історичні кадастрові карти",
+            "sidebarTitle": "Карта села Дошно"
+        }
     },
     "comingSoon": {
         "inDevelopmentLabel": "Карта в розробці",

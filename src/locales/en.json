@@ -33,6 +33,7 @@
         "searchPlaceholder": "Search for a landowner...",
         "searchNotFound": "No landowners found"
     },
+    
     "ownerModal": {
         "title": "Landowner information",
         "houseNumber": "House Number",
@@ -55,19 +56,19 @@
             "ownerLabel": "Landowner"
         }
     },
-    "lishchovateMap": {
-        "documentTitle": "Leszczowate - Historical Cadastral Maps",
-        "sidebarTitle": "Leszczowate Map"
-    },
-    "perehnoivMap": {
-        "documentTitle": "Perehnoiv - Historical Cadastral Maps",
-        "title": "Perehnoiv",
-        "sidebarTitle": "Perehnoiv Map"
-    },
-    "doshnoMap": {
-        "documentTitle": "Deszno - Historical Cadastral Maps",
-        "title": "Deszno",
-        "sidebarTitle": "Deszno Map"
+    "pages": {
+        "leszczowate": {
+            "documentTitle": "Leszczowate - Historical Cadastral Maps",
+            "sidebarTitle": "Leszczowate Map"
+        },
+        "perehnoiv": {
+            "documentTitle": "Perehnoiv - Historical Cadastral Maps",
+            "sidebarTitle": "Perehnoiv Map"
+        },
+        "deszno": {
+            "documentTitle": "Deszno - Historical Cadastral Maps",
+            "sidebarTitle": "Deszno Map"
+        }
     },
     "comingSoon": {
         "inDevelopmentLabel": "Map under construction",

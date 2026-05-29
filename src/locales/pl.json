@@ -29,6 +29,7 @@
         },
         "footer": "Mapy i dane opracowano w oparciu o oryginalne operaty katastralne pochodzące z CDIAL oraz AP Przemyśl."
     },
+    
     "sidebar": {
         "searchPlaceholder": "Wyszukiwanie właściciela...",
         "searchNotFound": "Nie znaleziono właścicieli"
@@ -55,15 +56,20 @@
             "ownerLabel": "Właściciel"
         }
     },
-    "perehnoivMap": {
-        "documentTitle": "Przegnojów - Historyczne mapy katastralne",
-        "title": "Przegnojów",
-        "sidebarTitle": "Mapa wsi Przegnojów"
-    },
-    "doshnoMap": {
-        "documentTitle": "Deszno - Historyczne mapy katastralne",
-        "title": "Deszno",
-        "sidebarTitle": "Mapa wsi Deszno"
+
+    "pages": {
+        "leszczowate": {
+            "documentTitle": "Leszczowate - Historyczne mapy katastralne",
+            "sidebarTitle": "Mapa wsi Leszczowate"
+        },
+        "perehnoiv": {
+            "documentTitle": "Przegnojów - Historyczne mapy katastralne",
+            "sidebarTitle": "Mapa wsi Przegnojów"
+        },
+        "deszno": {
+            "documentTitle": "Deszno - Historyczne mapy katastralne",
+            "sidebarTitle": "Mapa wsi Deszno"
+        }
     },
     "comingSoon": {
         "inDevelopmentLabel": "Mapa w trakcie opracowywania",

@@ -15,7 +15,7 @@ import { useParcelHandlers } from "../hooks/useParcelHandlers";
 
 export default function LishchovateMap() {
     const { t } = useTranslation();
-    useDocumentTitle(t('lishchovateMap.documentTitle'));
+    useDocumentTitle(t('pages.leszczowate.documentTitle'));
 
     const { data: parcels } = useParcelsData('leszczowate/parcels.geojson');
     const { owners } = useOwnersData('leszczowate/parcels.geojson', true);
@@ -36,7 +36,7 @@ export default function LishchovateMap() {
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
             <OwnersSidebar
-                titleText={t('lishchovateMap.sidebarTitle')}
+                titleText={t('pages.leszczowate.sidebarTitle')}
                 owners={owners}
                 isSelectable={true}
                 selectedOwner={selectedOwner}

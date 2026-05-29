@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 export default function DesznoMap() {
     const { t } = useTranslation();
-    useDocumentTitle(t('doshnoMap.documentTitle'));
+    useDocumentTitle(t('pages.deszno.documentTitle'));
 
     const { owners } = useOwnersData('deszno/owners.json', false);
     const { isModalOpen, modalData, handleModalClose, handleModalOpen } = useOwnerModal();
@@ -20,7 +20,7 @@ export default function DesznoMap() {
         <div className="flex flex-1 w-full h-screen overflow-hidden">
             {/* Sidebar */}
             <OwnersSidebar
-                titleText={t('doshnoMap.sidebarTitle')}
+                titleText={t('pages.deszno.sidebarTitle')}
                 owners={owners}
                 isSelectable={false}
                 isCollapsed={isCollapsed}
