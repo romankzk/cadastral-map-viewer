@@ -1,4 +1,5 @@
 import type { LatLngBoundsExpression, PathOptions } from "leaflet";
+import type { LandCategory, ParcelType } from ".";
 
 export const Colors = {
     Red500: "#ef4444",
@@ -105,3 +106,19 @@ export const MapConfig: Record<string, MapConfig> = {
         ]
     }
 }
+
+export const ParcelTypes: Record<string, ParcelType> = {
+    Build: "build",
+    Land: "ground"
+} as const;
+
+export const LangCategories: Record<string, LandCategory> = {
+    Garden: "garden",
+    Orchard: "orchard",
+    Yard: "yard",
+    Building: "building",
+    Field: "field",
+    Pasture: "pasture",
+    CommonPasture: "common_pasture",
+    Water: "water"
+} as const;

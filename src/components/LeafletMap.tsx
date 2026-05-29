@@ -1,12 +1,12 @@
 import { LayersControl, MapContainer, TileLayer, useMap, useMapEvents, ZoomControl } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { PanelBottomClose, PanelBottomOpen, PanelLeftClose, PanelLeftOpen } from "lucide-react";
-import LanguageSwitcher from "./LanguageSwitcher";
-import OpacitySlider from "./OpacitySlider";
+import LanguageSwitcher from "./map/LanguageSwitcher";
+import OpacitySlider from "./map/OpacitySlider";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { MapConfig } from "../types/constants";
-import ParcelInfoBox from "./ParcelInfoBox";
+import ParcelInfoBox from "./map/ParcelInfoBox";
 
 interface LeafletMapProps {
     mapConfig: MapConfig

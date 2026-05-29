@@ -8,6 +8,7 @@ interface ParcelInfoBoxProps {
         owner_pl?: string;
         ownerName?: string;
         houseNumber?: string;
+        house_number?: string;
         land_category?: string;
         type?: string;
         parcel_type?: string;
@@ -33,6 +34,7 @@ export default function ParcelInfoBox({ activeParcel }: ParcelInfoBoxProps) {
     const ownerName = activeParcel.ownerName || (i18n.language === 'uk' ? activeParcel.owner_uk : activeParcel.owner_pl);
     const parcelNum = activeParcel.parcel_number;
     const category = activeParcel.land_category;
+    const houseNum = activeParcel.houseNumber || activeParcel.house_number;
 
     return (
         <div className="absolute bottom-5 left-5 z-[1000] min-w-[200px] max-w-[300px] rounded-lg bg-white shadow-xl border border-slate-200 p-4 transition-all duration-300 pointer-events-none">
@@ -77,7 +79,7 @@ export default function ParcelInfoBox({ activeParcel }: ParcelInfoBoxProps) {
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100/80 text-slate-700 uppercase">
-                                {activeParcel.houseNumber || '—'}
+                                {houseNum || '—'}
                             </div>
                             <div className="text-base font-semibold text-slate-700 leading-tight">
                                 {ownerName}

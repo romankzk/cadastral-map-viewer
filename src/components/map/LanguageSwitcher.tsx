@@ -1,6 +1,6 @@
 import { Globe } from 'lucide-react';
 import { useState } from 'react';
-import BaseLanguageControl from './BaseLanguageControl';
+import BaseLanguageControl from '../BaseLanguageControl';
 
 export default function LanguageSwitcher() {
   const [isExpanded, setIsExpanded] = useState(false);

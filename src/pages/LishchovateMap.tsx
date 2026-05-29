@@ -1,12 +1,8 @@
 import 'leaflet/dist/leaflet.css';
-import { GeoJSON } from 'react-leaflet/GeoJSON'
-import { useState, useCallback, useMemo } from "react";
-import { MapConfig, ParcelStyles } from "../types/constants";
-import type { Owner } from "../types";
+import { useState, useMemo } from "react";
+import { MapConfig } from "../types/constants";
+import type { Owner, ParcelBasic, ParcelDetailed } from "../types";
 import { useParcelsData } from "../hooks/useParcelsData";
-import { getFeatureStyle } from "../utils/style-utils";
-import type { Layer } from "leaflet";
-import type { Feature } from 'geojson';
 import OwnersSidebar from "../components/Sidebar";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { useTranslation } from "react-i18next";
@@ -15,9 +11,11 @@ import OwnerDetailsModal from "../components/OwnerDetailsModal";
 import { useOwnerModal } from "../hooks/useOwnerModal";
 import LeafletMap from "../components/LeafletMap";
 import { useSidebar } from "../hooks/useSidebar";
+import { useParcelHandlers } from "../hooks/useParcelHandlers";
+import { GeoJSON } from 'react-leaflet/GeoJSON'
 
 export default function LishchovateMap() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     useDocumentTitle(t('lishchovateMap.documentTitle'));
 
     const { data: parcels } = useParcelsData('leszczowate/parcels.geojson');
@@ -25,68 +23,16 @@ export default function LishchovateMap() {
     const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
 
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
-    const [hoveredParcel, setHoveredParcel] = useState<any>(null);
+    const [hoveredParcel, setHoveredParcel] = useState<ParcelBasic | ParcelDetailed | null>(null);
     const { isCollapsed, handleCollapsedChange } = useSidebar();
-    
-    // Helper to check if a feature's parcel belongs to the currently selected owner
-    const isFeatureSelected = useCallback((feature: Feature | undefined) => {
-        const currentFeatureOwner = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
-        const currentFeatureHouse = feature?.properties?.house_number;
-        const featureHouseInt = currentFeatureHouse ? parseInt(currentFeatureHouse, 10) : null;
 
-        return (
-            selectedOwner &&
-            currentFeatureOwner === selectedOwner.ownerName &&
-            featureHouseInt &&
-            selectedOwner.houseNumber === featureHouseInt
-        );
-    }, [selectedOwner, i18n.language]);
-
-    // Style each feature on init
-    const onFeatureStyle = useCallback((feature: Feature | undefined) => {
-        const currentFeatureType = feature?.properties?.type;
-
-        if (isFeatureSelected(feature)) {
-            return ParcelStyles.selected;
-        }
-        return getFeatureStyle(currentFeatureType);
-    }, [isFeatureSelected]);
-
-    // Event handlers for parcels
-    const onEachParcel = useCallback((feature: Feature, layer: Layer) => {
-        const rawHouseNum = feature.properties?.house_number;
-        const houseNum = rawHouseNum ? parseInt(rawHouseNum, 10) : null;
-        const ownerName = i18n.language === 'uk' ? feature?.properties?.owner_uk?.trim() : feature?.properties?.owner_pl?.trim();
-
-        layer.on({
-            click: () => {
-                if (ownerName && houseNum) {
-                    const matchingOwner = owners.find(o => o.ownerName === ownerName && o.houseNumber === houseNum);
-
-                    if (matchingOwner) {
-                        setSelectedOwner(matchingOwner);
-
-                        const targetButton = document.getElementById(`owner-btn-${matchingOwner.id}`);
-                        if (targetButton) {
-                            targetButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
-                    }
-                }
-            },
-            mouseover: (e) => {
-                e.target.setStyle(ParcelStyles.hover);
-                setHoveredParcel(feature.properties);
-            },
-            mouseout: (e) => {
-                setHoveredParcel(null);
-                if (isFeatureSelected(feature)) {
-                    e.target.setStyle(ParcelStyles.selected);
-                    return;
-                }
-                e.target.setStyle(getFeatureStyle(feature.properties?.type));
-            }
-        });
-    }, [owners, isFeatureSelected, i18n.language]);
+    const { onFeatureStyle, onEachParcel } = useParcelHandlers({
+        mode: "detailed",
+        owners: owners,
+        selectedOwner: selectedOwner,
+        setSelectedOwner: setSelectedOwner,
+        setHoveredParcel: setHoveredParcel
+    });
 
     const geojsonNode = useMemo(() => {
         if (!parcels) return null;
