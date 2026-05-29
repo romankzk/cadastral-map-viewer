@@ -1,11 +1,11 @@
-import LeafletMap from "../components/LeafletMap";
-import OwnersSidebar from "../components/Sidebar";
-import { useOwnerModal } from "../hooks/useOwnerModal";
-import { useOwnersData } from "../hooks/useOwnersData";
-import { MapConfig } from "../types/constants";
-import OwnerDetailsModal from "../components/OwnerDetailsModal";
-import { useSidebar } from "../hooks/useSidebar";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import LeafletMap from "@/components/LeafletMap";
+import OwnersSidebar from "@/components/Sidebar";
+import { useOwnerModal } from "@/hooks/useOwnerModal";
+import { useOwnersData } from "@/hooks/useOwnersData";
+import { MapConfig } from "@/types/constants";
+import OwnerDetailsModal from "@/components/OwnerDetailsModal";
+import { useSidebar } from "@/hooks/useSidebar";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useTranslation } from "react-i18next";
 
 export default function DesznoMap() {

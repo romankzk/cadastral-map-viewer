@@ -1,30 +1,32 @@
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
-import { useTranslation } from "react-i18next";
-import OwnersSidebar from "../components/Sidebar";
-import { useOwnersData } from "../hooks/useOwnersData";
-import { useOwnerModal } from "../hooks/useOwnerModal";
-import OwnerDetailsModal from "../components/OwnerDetailsModal";
-import { MapConfig } from "../types/constants";
-import LeafletMap from "../components/LeafletMap";
-import { useSidebar } from "../hooks/useSidebar";
-import { useParcelsData } from "../hooks/useParcelsData";
+import 'leaflet/dist/leaflet.css';
 import { useState } from "react";
-import type { Owner, ParcelBasic, ParcelDetailed } from "../types";
-import { useParcelHandlers } from "../hooks/useParcelHandlers";
+import { MapConfig } from "@/types/constants";
+import type { Owner, ParcelBasic, ParcelDetailed } from "@/types";
+import { useParcelsData } from "@/hooks/useParcelsData";
+import OwnersSidebar from "@/components/Sidebar";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useTranslation } from "react-i18next";
+import { useOwnersData } from "@/hooks/useOwnersData";
+import OwnerDetailsModal from "@/components/OwnerDetailsModal";
+import { useOwnerModal } from "@/hooks/useOwnerModal";
+import LeafletMap from "@/components/LeafletMap";
+import { useSidebar } from "@/hooks/useSidebar";
+import { useParcelHandlers } from "@/hooks/useParcelHandlers";
 
-export default function PerehnoivMap() {
+export default function LeszczowateMap() {
     const { t } = useTranslation();
-    useDocumentTitle(t('pages.perehnoiv.documentTitle'));
+    useDocumentTitle(t('pages.leszczowate.documentTitle'));
 
-    const { data: parcels } = useParcelsData('perehnoiv/parcels.geojson');
-    const { owners } = useOwnersData('perehnoiv/owners.json', false);
+    const { data: parcels } = useParcelsData('leszczowate/parcels.geojson');
+    const { owners } = useOwnersData('leszczowate/parcels.geojson', true);
+    const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
+
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
     const [hoveredParcel, setHoveredParcel] = useState<ParcelBasic | ParcelDetailed | null>(null);
-    const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
     const { isCollapsed, handleCollapsedChange } = useSidebar();
-    
+
     const { onFeatureStyle, onEachParcel } = useParcelHandlers({
-        mode: "basic",
+        mode: "detailed",
         owners: owners,
         selectedOwner: selectedOwner,
         setSelectedOwner: setSelectedOwner,
@@ -33,9 +35,8 @@ export default function PerehnoivMap() {
 
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
-            {/* Sidebar */}
             <OwnersSidebar
-                titleText={t('pages.perehnoiv.sidebarTitle')}
+                titleText={t('pages.leszczowate.sidebarTitle')}
                 owners={owners}
                 isSelectable={true}
                 selectedOwner={selectedOwner}
@@ -47,7 +48,7 @@ export default function PerehnoivMap() {
 
             {/* Map Container */}
             <LeafletMap
-                mapConfig={MapConfig.Perehnoiv}
+                mapConfig={MapConfig.Leszczowate}
                 sidebarState={{
                     isCollapsed: isCollapsed,
                     onCollapseChange: handleCollapsedChange
@@ -59,10 +60,11 @@ export default function PerehnoivMap() {
                     selectedOwner: selectedOwner,
                     onEachParcel: onEachParcel,
                     onFeatureStyle: onFeatureStyle
+
                 }}
                 tileLayer={{
                     name: t('mapControls.layerControl.historical'),
-                    url: "https://romankzk.github.io/map-tiles-perehnoiv/tiles/{z}/{x}/{y}.png"
+                    url: "https://romankzk.github.io/map-tiles-leszczowate/tiles-1855/{z}/{x}/{y}.png"
                 }}
             />
 

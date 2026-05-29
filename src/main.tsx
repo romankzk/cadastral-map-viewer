@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createHashRouter, Navigate, RouterProvider } from 'react-router-dom';
-import LishchovateMap from './pages/LishchovateMap.tsx';
-import PerehnoivMap from './pages/PerehnoivMap.tsx';
+import LeszczowateMap from './pages/villages/Leszczowate.tsx';
+import PerehnoivMap from './pages/villages/Perehnoiv.tsx';
 import Home from './pages/Home.tsx';
 import './i18n';
-import DesznoMap from './pages/DesznoMap.tsx';
+import DesznoMap from './pages/villages/Deszno.tsx';
 
 const router = createHashRouter([
   {
@@ -20,7 +20,7 @@ const router = createHashRouter([
       },
       {
         path: 'maps/lishchovate',
-        element: <LishchovateMap />
+        element: <LeszczowateMap />
       },
       {
         path: 'maps/perehnoiv',
