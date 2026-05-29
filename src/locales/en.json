@@ -3,37 +3,54 @@
         "documentTitle": "Historical Cadastral Maps",
         "title": "Historical Cadastral Maps",
         "subtitle": "Interactive viewer for historical cadastral maps and plans of the Halychyna (Galicia) region.",
-        "cards": {
-            "perehnoiv": {
-                "title": "Perehnoiv",
-                "region": "Hlyniany community, Lviv region",
-                "description": "Historically, the village was part of the Hlyniany starostwo, and later the Złoczów Kreis. The final cadastral map and its accompanying descriptive records are preserved in CDIAL.",
-                "date": "1845",
-                "source1": "CDIAL - fond 186, series 6, file 886",
-                "source2": "CDIAL - fond 186, series 1, files 2426–2428"
-            },
-            "lishchovate": {
-                "title": "Leszczowate (and Wola Maćkowa)",
-                "region": "Bieszczady County, Subcarpathian Voivodeship",
-                "description": "Historically, the village was owned by the Kraiński family, within the boundaries of the historical Sanok Kreis. The map is based on an indication sketch from 1852 and the final map (undated, circa 1855) from the State Archive in Przemyśl.",
-                "date": "1852-1855"
-            },
-            "doshno": {
-                "title": "Deszno",
-                "region": "Rymanów-Zdrój, Krosno County, Subcarpathian Voivodeship",
-                "description": "",
-                "date": "1854"
-            },
+        "actions": {
             "openBtn": "Open map",
             "sourcesText": "Sources"
         },
         "footer": "Maps and data are processed based on original cadastral records from the Central State Historical Archive of Ukraine in Lviv (CDIAL) and the State Archive in Przemyśl (Poland)."
     },
+    "villages": {
+        "leszczowate": {
+            "documentTitle": "Leszczowate - Historical Cadastral Maps",
+            "sidebarTitle": "Leszczowate Map",
+            "cardTitle": "Leszczowate (and Wola Maćkowa)",
+            "region": "Bieszczady County, Subcarpathian Voivodeship",
+            "description": "Historically, the village was owned by the Kraiński family, within the boundaries of the historical Sanok Kreis. The map is based on an indication sketch from 1852 and the final map (undated, circa 1855) from the State Archive in Przemyśl.",
+            "date": "1852-1855",
+            "sources": [
+                { "text": "APP - Archiwum Geodezyjne. - Leszczowate. - sygn. 3", "link": "https://www.szukajwarchiwach.gov.pl/en/jednostka/-/jednostka/27137468" },
+                { "text": "APP - Archiwum Geodezyjne. - sygn. 0896M" }
+            ]
+        },
+        "perehnoiv": {
+            "documentTitle": "Perehnoiv - Historical Cadastral Maps",
+            "sidebarTitle": "Perehnoiv Map",
+            "cardTitle": "Perehnoiv",
+            "region": "Hlyniany community, Lviv region",
+            "description": "Historically, the village was part of the Hlyniany starostwo, and later the Złoczów Kreis. The final cadastral map and its accompanying descriptive records are preserved in CDIAL.",
+            "date": "1845",
+            "sources": [
+                { "text": "CDIAL - fond 186, series 6, file 886" },
+                { "text": "CDIAL - fond 186, series 1, files 2426–2428" }
+            ]
+        },
+        "deszno": {
+            "documentTitle": "Deszno - Historical Cadastral Maps",
+            "sidebarTitle": "Deszno Map",
+            "cardTitle": "Deszno",
+            "region": "Rymanów-Zdrój, Krosno County, Subcarpathian Voivodeship",
+            "description": "",
+            "date": "1854",
+            "sources": [
+                { "text": "APP - Archiwum Geodezyjne. - Deszno. - sygn. 1-10", "link": "https://www.szukajwarchiwach.gov.pl/en/seria?p_p_id=Seria&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_Seria_nameofjsp=jednostki&_Seria_id_serii=718365" }
+            ]
+        }
+    },
     "sidebar": {
         "searchPlaceholder": "Search for a landowner...",
         "searchNotFound": "No landowners found"
     },
-    
+
     "ownerModal": {
         "title": "Landowner information",
         "houseNumber": "House Number",
@@ -43,6 +60,7 @@
         "buildParcels": "Building Parcels",
         "landParcels": "Land Parcels"
     },
+
     "mapControls": {
         "opacityLabel": "Opacity",
         "layerControl": {
@@ -56,26 +74,14 @@
             "ownerLabel": "Landowner"
         }
     },
-    "pages": {
-        "leszczowate": {
-            "documentTitle": "Leszczowate - Historical Cadastral Maps",
-            "sidebarTitle": "Leszczowate Map"
-        },
-        "perehnoiv": {
-            "documentTitle": "Perehnoiv - Historical Cadastral Maps",
-            "sidebarTitle": "Perehnoiv Map"
-        },
-        "deszno": {
-            "documentTitle": "Deszno - Historical Cadastral Maps",
-            "sidebarTitle": "Deszno Map"
-        }
-    },
+
     "comingSoon": {
         "inDevelopmentLabel": "Map under construction",
         "description": "We are actively working on processing archival cadastral maps, georeferencing coordinates, and verifying the lists of historical landowners.",
         "comingSoon": "Coming soon.",
         "backBtn": "Back to Home"
     },
+
     "landCategories": {
         "garden": "garden",
         "pasture": "pasture",

@@ -14,7 +14,7 @@ import { useParcelHandlers } from "@/hooks/useParcelHandlers";
 
 export default function PerehnoivMap() {
     const { t } = useTranslation();
-    useDocumentTitle(t('pages.perehnoiv.documentTitle'));
+    useDocumentTitle(t('villages.perehnoiv.documentTitle'));
 
     const { data: parcels } = useParcelsData('perehnoiv/parcels.geojson');
     const { owners } = useOwnersData('perehnoiv/owners.json', false);
@@ -35,7 +35,7 @@ export default function PerehnoivMap() {
         <div className="flex flex-1 w-full h-screen overflow-hidden">
             {/* Sidebar */}
             <OwnersSidebar
-                titleText={t('pages.perehnoiv.sidebarTitle')}
+                titleText={t('villages.perehnoiv.sidebarTitle')}
                 owners={owners}
                 isSelectable={true}
                 selectedOwner={selectedOwner}

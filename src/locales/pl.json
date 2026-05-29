@@ -3,37 +3,56 @@
         "documentTitle": "Historyczne mapy katastralne",
         "title": "Historyczne mapy katastralne",
         "subtitle": "Interaktywna przeglądarka map historycznych i planów gmin katastralnych Galicji.",
-        "cards": {
-            "perehnoiv": {
-                "title": "Przegnojów",
-                "region": "Gliniany (hromada), obwód lwowski",
-                "description": "Historycznie wieś należała do starostwa gliniańskiego, późniejszego cyrkułu złoczowskiego. Mapa ostateczna oraz powiązane operaty opisowe znajdują się w CDIAL.",
-                "date": "1845",
-                "source1": "CDIAL. - zesp. 186, inw. 6, sygn. 886",
-                "source2": "CDIAL. - zesp. 186, inw. 1, sygn. 2426–2428"
-            },
-            "lishchovate": {
-                "title": "Leszczowate (z Wolą Maćkową)",
-                "region": "Powiat bieszczadzki, województwo podkarpackie",
-                "description": "Wieś należała dawniej do rodziny Kraińskich, w granicach historycznego powiatu sanockiego. Mapa oparta na szkicu indykacyjnym z 1852 roku oraz mapie ostatecznej (ok. 1855) z Archiwum Państwowego w Przemyślu.",
-                "date": "1852-1855"
-            },
-            "doshno": {
-                "title": "Deszno",
-                "region": "Rymanów-Zdrój, powiat krosneński, województwo podkarpackie",
-                "description": "",
-                "date": "1854"
-            },
+        "actions": {
             "openBtn": "Otwórz mapę",
             "sourcesText": "Źródła"
         },
         "footer": "Mapy i dane opracowano w oparciu o oryginalne operaty katastralne pochodzące z CDIAL oraz AP Przemyśl."
     },
-    
+
+    "villages": {
+        "leszczowate": {
+            "documentTitle": "Leszczowate - Historyczne mapy katastralne",
+            "sidebarTitle": "Mapa wsi Leszczowate",
+            "cardTitle": "Leszczowate (z Wolą Maćkową)",
+            "region": "Powiat bieszczadzki, województwo podkarpackie",
+            "description": "Wieś należała dawniej do rodziny Kraińskich, w granicach historycznego powiatu sanockiego. Mapa oparta na szkicu indykacyjnym z 1852 roku oraz mapie ostatecznej (ok. 1855) z Archiwum Państwowego w Przemyślu.",
+            "date": "1852-1855",
+            "sources": [
+                { "text": "APP - Archiwum Geodezyjne. - Leszczowate. - sygn. 3", "link": "https://www.szukajwarchiwach.gov.pl/en/jednostka/-/jednostka/27137468" },
+                { "text": "APP - Archiwum Geodezyjne. - sygn. 0896M" }
+            ]
+        },
+        "perehnoiv": {
+            "documentTitle": "Przegnojów - Historyczne mapy katastralne",
+            "sidebarTitle": "Mapa wsi Przegnojów",
+            "cardTitle": "Przegnojów",
+            "region": "Gliniany (hromada), obwód lwowski",
+            "description": "Historycznie wieś należała do starostwa gliniańskiego, późniejszego cyrkułu złoczowskiego. Mapa ostateczna oraz powiązane operaty opisowe znajdują się w CDIAL.",
+            "date": "1845",
+            "sources": [
+                { "text": "CDIAL. - zesp. 186, inw. 6, sygn. 886" },
+                { "text": "CDIAL. - zesp. 186, inw. 1, sygn. 2426–2428" }
+            ]
+        },
+        "deszno": {
+            "documentTitle": "Deszno - Historyczne mapy katastralne",
+            "sidebarTitle": "Mapa wsi Deszno",
+            "cardTitle": "Deszno",
+            "region": "Rymanów-Zdrój, powiat krosneński, województwo podkarpackie",
+            "description": "",
+            "date": "1854",
+            "sources": [
+                { "text": "APP - Archiwum Geodezyjne. - Deszno. - sygn. 1-10", "link": "https://www.szukajwarchiwach.gov.pl/en/seria?p_p_id=Seria&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_Seria_nameofjsp=jednostki&_Seria_id_serii=718365" }
+            ]
+        }
+    },
+
     "sidebar": {
         "searchPlaceholder": "Wyszukiwanie właściciela...",
         "searchNotFound": "Nie znaleziono właścicieli"
     },
+
     "ownerModal": {
         "title": "Informacje o właścicielu",
         "houseNumber": "Numer domu",
@@ -43,6 +62,7 @@
         "buildParcels": "Działki budowlane",
         "landParcels": "Działki gruntowe"
     },
+
     "mapControls": {
         "opacityLabel": "Przezroczystość",
         "layerControl": {
@@ -57,26 +77,13 @@
         }
     },
 
-    "pages": {
-        "leszczowate": {
-            "documentTitle": "Leszczowate - Historyczne mapy katastralne",
-            "sidebarTitle": "Mapa wsi Leszczowate"
-        },
-        "perehnoiv": {
-            "documentTitle": "Przegnojów - Historyczne mapy katastralne",
-            "sidebarTitle": "Mapa wsi Przegnojów"
-        },
-        "deszno": {
-            "documentTitle": "Deszno - Historyczne mapy katastralne",
-            "sidebarTitle": "Mapa wsi Deszno"
-        }
-    },
     "comingSoon": {
         "inDevelopmentLabel": "Mapa w trakcie opracowywania",
         "description": "Aktualnie zajmujemy się przetwarzaniem archiwalnych map katastralnych, kalibracją współrzędnych i weryfikacją list historycznych właścicieli działek.",
         "comingSoon": "Planujemy opublikować ją w niedalekiej przyszłości.",
         "backBtn": "Powrót do strony głównej"
     },
+
     "landCategories": {
         "garden": "ogród",
         "pasture": "łąka",

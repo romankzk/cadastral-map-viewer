@@ -19,7 +19,7 @@ const router = createHashRouter([
         element: <Home />
       },
       {
-        path: 'maps/lishchovate',
+        path: 'maps/leszczowate',
         element: <LeszczowateMap />
       },
       {
@@ -27,7 +27,7 @@ const router = createHashRouter([
         element: <PerehnoivMap />
       },
       {
-        path: 'maps/doshno',
+        path: 'maps/deszno',
         element: <DesznoMap />
       },
       {

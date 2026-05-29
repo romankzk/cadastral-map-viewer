@@ -15,7 +15,7 @@ import { useParcelHandlers } from "@/hooks/useParcelHandlers";
 
 export default function LeszczowateMap() {
     const { t } = useTranslation();
-    useDocumentTitle(t('pages.leszczowate.documentTitle'));
+    useDocumentTitle(t('villages.leszczowate.documentTitle'));
 
     const { data: parcels } = useParcelsData('leszczowate/parcels.geojson');
     const { owners } = useOwnersData('leszczowate/parcels.geojson', true);
@@ -36,7 +36,7 @@ export default function LeszczowateMap() {
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
             <OwnersSidebar
-                titleText={t('pages.leszczowate.sidebarTitle')}
+                titleText={t('villages.leszczowate.sidebarTitle')}
                 owners={owners}
                 isSelectable={true}
                 selectedOwner={selectedOwner}
