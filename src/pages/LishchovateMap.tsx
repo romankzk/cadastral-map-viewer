@@ -1,5 +1,5 @@
 import 'leaflet/dist/leaflet.css';
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { MapConfig } from "../types/constants";
 import type { Owner, ParcelBasic, ParcelDetailed } from "../types";
 import { useParcelsData } from "../hooks/useParcelsData";
@@ -12,7 +12,6 @@ import { useOwnerModal } from "../hooks/useOwnerModal";
 import LeafletMap from "../components/LeafletMap";
 import { useSidebar } from "../hooks/useSidebar";
 import { useParcelHandlers } from "../hooks/useParcelHandlers";
-import { GeoJSON } from 'react-leaflet/GeoJSON'
 
 export default function LishchovateMap() {
     const { t } = useTranslation();
@@ -33,18 +32,6 @@ export default function LishchovateMap() {
         setSelectedOwner: setSelectedOwner,
         setHoveredParcel: setHoveredParcel
     });
-
-    const geojsonNode = useMemo(() => {
-        if (!parcels) return null;
-        return (
-            <GeoJSON
-                data={parcels}
-                onEachFeature={onEachParcel}
-                style={onFeatureStyle}
-                key={selectedOwner ? `highlight-${selectedOwner.id}` : 'default'}
-            />
-        );
-    }, [parcels, onEachParcel, onFeatureStyle, selectedOwner]);
 
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
@@ -69,7 +56,11 @@ export default function LishchovateMap() {
                 activeParcel={hoveredParcel}
                 geojsonLayer={{
                     name: t('mapControls.layerControl.parcels'),
-                    node: geojsonNode
+                    data: parcels,
+                    selectedOwner: selectedOwner,
+                    onEachParcel: onEachParcel,
+                    onFeatureStyle: onFeatureStyle
+
                 }}
                 tileLayer={{
                     name: t('mapControls.layerControl.historical'),

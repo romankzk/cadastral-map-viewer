@@ -8,8 +8,7 @@ import { MapConfig } from "../types/constants";
 import LeafletMap from "../components/LeafletMap";
 import { useSidebar } from "../hooks/useSidebar";
 import { useParcelsData } from "../hooks/useParcelsData";
-import { GeoJSON } from 'react-leaflet/GeoJSON'
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import type { Owner, ParcelBasic, ParcelDetailed } from "../types";
 import { useParcelHandlers } from "../hooks/useParcelHandlers";
 
@@ -31,18 +30,6 @@ export default function PerehnoivMap() {
         setSelectedOwner: setSelectedOwner,
         setHoveredParcel: setHoveredParcel
     });
-
-    const geojsonNode = useMemo(() => {
-        if (!parcels) return null;
-        return (
-            <GeoJSON
-                data={parcels}
-                onEachFeature={onEachParcel}
-                style={onFeatureStyle}
-                key={selectedOwner ? `highlight-${selectedOwner.id}` : 'default'}
-            />
-        );
-    }, [parcels, onEachParcel, onFeatureStyle, selectedOwner]);
 
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
@@ -68,7 +55,10 @@ export default function PerehnoivMap() {
                 activeParcel={hoveredParcel}
                 geojsonLayer={{
                     name: t('mapControls.layerControl.parcels'),
-                    node: geojsonNode
+                    data: parcels,
+                    selectedOwner: selectedOwner,
+                    onEachParcel: onEachParcel,
+                    onFeatureStyle: onFeatureStyle
                 }}
                 tileLayer={{
                     name: t('mapControls.layerControl.historical'),

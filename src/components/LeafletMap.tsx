@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { MapConfig } from "../types/constants";
 import ParcelInfoBox from "./map/ParcelInfoBox";
+import { GeoJSON } from 'react-leaflet/GeoJSON'
+import type { Feature, FeatureCollection } from "geojson";
+import type { Owner } from "../types";
+import type { Layer, PathOptions } from "leaflet";
 
 interface LeafletMapProps {
     mapConfig: MapConfig
@@ -20,7 +24,10 @@ interface LeafletMapProps {
     },
     geojsonLayer?: {
         name: string,
-        node: React.ReactNode
+        data: FeatureCollection | null,
+        onEachParcel: (feature: Feature, layer: Layer) => void,
+        onFeatureStyle: (feature: Feature | undefined) => PathOptions,
+        selectedOwner: Owner | null
     },
     activeParcel?: any
 }
@@ -114,9 +121,14 @@ export default function LeafletMap({
                             </LayersControl.Overlay>
                         )}
 
-                        {geojsonLayer && geojsonLayer.node && (
+                        {geojsonLayer && geojsonLayer.data && (
                             <LayersControl.Overlay checked name={geojsonLayer.name}>
-                                {geojsonLayer.node}
+                                <GeoJSON
+                                    data={geojsonLayer.data}
+                                    onEachFeature={geojsonLayer.onEachParcel}
+                                    style={geojsonLayer.onFeatureStyle}
+                                    key={geojsonLayer.selectedOwner ? `highlight-${geojsonLayer.selectedOwner.id}` : 'default'}
+                                />
                             </LayersControl.Overlay>
                         )}
                     </LayersControl>
