@@ -1,4 +1,4 @@
-import { ArrowLeft, CircleUserRound } from "lucide-react";
+import { CircleUserRound, House } from "lucide-react";
 import { useOwnerSearch } from "../hooks/useOwnerSearch";
 import type { Owner } from "../types";
 import SearchFilter from "./SearchFilter";
@@ -32,7 +32,7 @@ export default function Sidebar({ titleText, owners, isSelectable = true, select
                         to={'/'}
                         className="text-xs px-1 py-1 rounded text-slate-700 cursor-pointer hover:bg-slate-200 transition-colors"
                     >
-                        <ArrowLeft size={18} />
+                        <House size={18} />
                     </Link>
                     <h2 className="text-lg font-bold text-slate-800">{titleText}</h2>
                 </div>
