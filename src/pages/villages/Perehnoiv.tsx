@@ -9,7 +9,7 @@ import LeafletMap from "@/components/LeafletMap";
 import { useSidebar } from "@/hooks/useSidebar";
 import { useParcelsData } from "@/hooks/useParcelsData";
 import { useState } from "react";
-import type { Owner, ParcelBasic, ParcelDetailed } from "@/types";
+import type { HoveredParcel, Owner } from "@/types";
 import { useParcelHandlers } from "@/hooks/useParcelHandlers";
 
 export default function PerehnoivMap() {
@@ -19,7 +19,7 @@ export default function PerehnoivMap() {
     const { data: parcels } = useParcelsData('perehnoiv/parcels.geojson');
     const { owners } = useOwnersData('perehnoiv/owners.json', false);
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
-    const [hoveredParcel, setHoveredParcel] = useState<ParcelBasic | ParcelDetailed | null>(null);
+    const [hoveredParcel, setHoveredParcel] = useState<HoveredParcel | null>(null);
     const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
     const { isCollapsed, handleCollapsedChange } = useSidebar();
     
