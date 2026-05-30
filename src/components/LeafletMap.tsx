@@ -50,7 +50,7 @@ export default function LeafletMap({
     };
 
     return (
-        <div className={`relative flex-1 min-w-0 ${sidebarState.isCollapsed ? `h-full` : `h-[50vh]`} md:h-full bg-slate-100 transition-all duration-300`}>
+        <div className={`relative flex-1 min-w-0 ${sidebarState.isCollapsed ? `h-full` : `h-[50svh]`} md:h-full bg-slate-100 transition-all duration-300`}>
 
             <div className="absolute inset-0 w-full h-full">
                 {/* Expand/collapse sidebar button */}
@@ -127,7 +127,7 @@ export default function LeafletMap({
                                     data={geojsonLayer.data}
                                     onEachFeature={geojsonLayer.onEachParcel}
                                     style={geojsonLayer.onFeatureStyle}
-                                    key={geojsonLayer.selectedOwner ? `highlight-${geojsonLayer.selectedOwner.id}` : 'default'}
+                                    key={`${i18n.language}-${geojsonLayer.selectedOwner ? `highlight-${geojsonLayer.selectedOwner.id}` : 'default'}`}
                                 />
                             </LayersControl.Overlay>
                         )}
