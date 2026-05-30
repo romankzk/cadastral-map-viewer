@@ -107,7 +107,7 @@
         "ownerOrigin": "Дошно",
         "note": "",
         "buildParcels": null,
-        "landParcels": []
+        "landParcels": [1304, 2277, 2278, 2279, 2280, 2282, 2286, 2288, 2289, 2291, 2292, 2296, 2298, 2299, 2301, 2302, 2303, 2304, 2305, 2306, 2307]
     },
     {
         "orderNumber": 11,
@@ -117,19 +117,19 @@
         "ownerStatus": "",
         "ownerOrigin": "Дошно",
         "note": "",
-        "buildParcels": [49],
-        "landParcels": []
+        "buildParcels": [48],
+        "landParcels": [1632]
     },
     {
         "orderNumber": 12,
         "houseNumber": 5,
         "ownerOriginal": "Deszno Pfarre",
-        "ownerName": "[парафія]",
+        "ownerName": "[проборство]",
         "ownerStatus": "",
         "ownerOrigin": "Дошно",
         "note": "",
         "buildParcels": [45, 46],
-        "landParcels": []
+        "landParcels": [928, 929, 930, 931, 932, 933, 934, 935, 936, 937, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 1018, 1019, 1020, 1021, 1022, 1627, 1628, 1629, 1630, 1631, 1633, 1634, 1635, 1636, 1637, 1877, 1878, 1879, 1880, 1881, 1882, 1883, 1884, 1885, 1886, 1887, 2275, 2276]
     },
     {
         "orderNumber": 13,
@@ -162,7 +162,7 @@
         "ownerOrigin": "Дошно",
         "note": "",
         "buildParcels": [54],
-        "landParcels": []
+        "landParcels": [504, 505, 506, 507, 508, 509, 510, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 563, 575, 576, 577, 578, 579, 580, 792, 1068, 1142, 1143, 1144, 1160, 1162, 1164, 1165, 1167, 1178, 1179, 1301, 1302, 1303, 1317, 1320, 1326, 1327, 1328, 1329, 1330, 1331, 1332, 1333, 1334, 1775, 1776, 1777, 1778, 1779, 1794, 1795, 1796, 1813, 1814, 1815, 1816, 1817, 1818, 1819, 1820, 1821, 1822, 1904, 1905, 1906, 2272, 2284]
     },
     {
         "orderNumber": 16,
@@ -355,7 +355,7 @@
         "orderNumber": 33,
         "houseNumber": 29,
         "ownerOriginal": "Odrzechowski Alexander, bauer aus Deszno",
-        "ownerName": "Олександр Одреховський",
+        "ownerName": "Олександр Одрехівський",
         "ownerStatus": "господар з Дошно",
         "ownerOrigin": "Дошно",
         "note": "",
@@ -366,7 +366,7 @@
         "orderNumber": 34,
         "houseNumber": 33,
         "ownerOriginal": "Odrzechowski Andreas, bauer aus Deszno",
-        "ownerName": "Андрій Одреховський",
+        "ownerName": "Андрій Одрехівський",
         "ownerStatus": "господар з Дошно",
         "ownerOrigin": "Дошно",
         "note": "",
@@ -377,7 +377,7 @@
         "orderNumber": 35,
         "houseNumber": 32,
         "ownerOriginal": "Odrzechowski Iwan, bauer aus Deszno",
-        "ownerName": "Іван Одреховський",
+        "ownerName": "Іван Одрехівський",
         "ownerStatus": "господар з Дошно",
         "ownerOrigin": "Дошно",
         "note": "",
@@ -388,7 +388,7 @@
         "orderNumber": 36,
         "houseNumber": 4,
         "ownerOriginal": "Odrzechowski Michal, bauer aus Deszno",
-        "ownerName": "Міхал Одреховський",
+        "ownerName": "Міхал Одрехівський",
         "ownerStatus": "господар з Дошно",
         "ownerOrigin": "Дошно",
         "note": "",
@@ -525,7 +525,7 @@
         "ownerOrigin": "Дошно",
         "note": "",
         "buildParcels": [50],
-        "landParcels": []
+        "landParcels": [1114, 1638, 1639, 1642, 1643, 1644, 1645, 1646, 1647, 1648, 1650, 1651, 1652, 1653, 1654, 1655, 1656, 1657, 1658, 1659, 1660, 1733]
     },
     {
         "orderNumber": 49,
@@ -536,7 +536,7 @@
         "ownerOrigin": "Дошно",
         "note": "",
         "buildParcels": [24],
-        "landParcels": []
+        "landParcels": [582]
     },
     {
         "orderNumber": 50,
@@ -564,7 +564,7 @@
         "orderNumber": 52,
         "houseNumber": 26,
         "ownerOriginal": "Zimba Iwan, bauer aus Deszno",
-        "ownerName": "Зімба Іван",
+        "ownerName": "Земба Іван",
         "ownerStatus": "господар з Дошно",
         "ownerOrigin": "Дошно",
         "note": "",
