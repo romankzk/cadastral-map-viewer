@@ -35,6 +35,10 @@ export default function DesznoMap() {
                     isCollapsed: isCollapsed,
                     onCollapseChange: handleCollapsedChange
                 }}
+                tileLayer={{
+                    name: t('mapControls.layerControl.historical'),
+                    url: "https://romankzk.github.io/map-tiles-deszno/tiles/{z}/{x}/{y}.png"
+                }}
             />
 
             {/* Owner Details Modal */}
