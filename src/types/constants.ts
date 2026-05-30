@@ -29,6 +29,11 @@ export const ParcelStyles: Record<string, PathOptions> = {
         fillColor: Colors.Red100,
         fillOpacity: 0.5
     },
+    road: {
+        ...baseParcelStyle,
+        fillColor: Colors.Red100,
+        fillOpacity: 0.5
+    },
     household: {
         ...baseParcelStyle,
         fillOpacity: 0.4
@@ -47,6 +52,11 @@ export const ParcelStyles: Record<string, PathOptions> = {
         fillOpacity: 0.2
     },
     common_pasture: {
+        ...baseParcelStyle,
+        fillColor: Colors.Green300,
+        fillOpacity: 0.2
+    },
+    cemetery: {
         ...baseParcelStyle,
         fillColor: Colors.Green300,
         fillOpacity: 0.2

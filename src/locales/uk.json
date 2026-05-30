@@ -94,6 +94,8 @@
         "water": "ріка / став",
         "orchard": "сад",
         "household": "господарство",
-        "forest": "ліс"
+        "forest": "ліс",
+        "road": "дорога",
+        "cemetery": "цвинтар"
     }
 }

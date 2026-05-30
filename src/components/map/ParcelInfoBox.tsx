@@ -15,7 +15,9 @@ export default function ParcelInfoBox({ activeParcel }: { activeParcel: HoveredP
         water: t("landCategories.water"),
         orchard: t("landCategories.orchard"),
         household: t("landCategories.household"),
-        forest: t("landCategories.forest")
+        forest: t("landCategories.forest"),
+        road: t("landCategories.road"),
+        cemetery: t("landCategories.cemetery")
     } as const;
 
     if (!activeParcel) return null;

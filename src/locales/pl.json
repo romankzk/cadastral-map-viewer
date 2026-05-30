@@ -94,6 +94,8 @@
         "water": "rzeka / staw",
         "orchard": "sad",
         "household": "zagroda",
-        "forest": "las"
+        "forest": "las",
+        "road": "droga",
+        "cemetery": "cmentarz"
     }
 }

@@ -7,14 +7,29 @@ import OwnerDetailsModal from "@/components/OwnerDetailsModal";
 import { useSidebar } from "@/hooks/useSidebar";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import type { HoveredParcel, Owner } from "@/types";
+import { useParcelHandlers } from "@/hooks/useParcelHandlers";
+import { useParcelsData } from "@/hooks/useParcelsData";
 
 export default function DesznoMap() {
     const { t } = useTranslation();
     useDocumentTitle(t('villages.deszno.documentTitle'));
 
     const { owners } = useOwnersData('deszno/owners.json', false);
+    const { data: parcels } = useParcelsData('deszno/parcels.geojson');
     const { isModalOpen, modalData, handleModalClose, handleModalOpen } = useOwnerModal();
     const { isCollapsed, handleCollapsedChange } = useSidebar();
+    const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
+    const [hoveredParcel, setHoveredParcel] = useState<HoveredParcel | null>(null);
+
+    const { onFeatureStyle, onEachParcel } = useParcelHandlers({
+        mode: "basic",
+        owners: owners,
+        selectedOwner: selectedOwner,
+        setSelectedOwner: setSelectedOwner,
+        setHoveredParcel: setHoveredParcel
+    });
 
     return (
         <div className="flex flex-1 w-full h-screen overflow-hidden">
@@ -22,7 +37,9 @@ export default function DesznoMap() {
             <OwnersSidebar
                 titleText={t('villages.deszno.sidebarTitle')}
                 owners={owners}
-                isSelectable={false}
+                isSelectable={true}
+                selectedOwner={selectedOwner}
+                onSelectOwner={(owner) => setSelectedOwner(owner)}
                 isCollapsed={isCollapsed}
                 onCollapsedChange={handleCollapsedChange}
                 onDetailsClick={handleModalOpen}
@@ -35,9 +52,17 @@ export default function DesznoMap() {
                     isCollapsed: isCollapsed,
                     onCollapseChange: handleCollapsedChange
                 }}
+                activeParcel={hoveredParcel}
                 tileLayer={{
                     name: t('mapControls.layerControl.historical'),
                     url: "https://romankzk.github.io/map-tiles-deszno/tiles/{z}/{x}/{y}.png"
+                }}
+                geojsonLayer={{
+                    name: t('mapControls.layerControl.parcels'),
+                    data: parcels,
+                    selectedOwner: selectedOwner,
+                    onEachParcel: onEachParcel,
+                    onFeatureStyle: onFeatureStyle
                 }}
             />
 

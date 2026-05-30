@@ -15,7 +15,7 @@ export interface ParcelDetailed {
     fid: number
     cadastral_number?: string
     house_number: string
-    type?: "household" | "yard" | "building" | "forest"
+    type?: LandCategory
     owner_uk: string
     locality_uk: string
     owner_pl: string
@@ -23,7 +23,7 @@ export interface ParcelDetailed {
 }
 
 export type ParcelType = "build" | "ground";
-export type LandCategory = "garden" | "field" | "water" | "orchard" | "pasture" | "common_pasture" | "building" | "yard" | "forest";
+export type LandCategory = "garden" | "field" | "water" | "orchard" | "pasture" | "common_pasture" | "building" | "yard" | "forest" | "road" | "cemetery" | "household";
 
 export interface ParcelBasic {
     fid: number
@@ -40,6 +40,6 @@ export interface HoveredParcel {
     houseNumber?: string | number
     house_number?: string
     land_category?: LandCategory
-    type?: "household" | "yard" | "building" | "forest"
+    type?: LandCategory
     parcel_type?: ParcelType
 };
