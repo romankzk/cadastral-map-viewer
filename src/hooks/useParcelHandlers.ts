@@ -1,6 +1,6 @@
 import type { Feature } from "geojson";
 import { useCallback } from "react";
-import type { Owner, ParcelDetailed, ParcelBasic } from "../types";
+import type { Owner, ParcelDetailed, ParcelBasic, HoveredParcel } from "../types";
 import { useTranslation } from "react-i18next";
 import { ParcelStyles, ParcelTypes } from "../types/constants";
 import type { Layer, LeafletMouseEvent } from "leaflet";
@@ -11,7 +11,7 @@ interface UseParcelHandlersProps {
     owners: Owner[];
     selectedOwner: Owner | null;
     setSelectedOwner: (owner: Owner | null) => void;
-    setHoveredParcel: (data: any | null) => void;
+    setHoveredParcel: (data: HoveredParcel | null) => void;
 }
 
 export function useParcelHandlers({
@@ -86,19 +86,24 @@ export function useParcelHandlers({
 
     const onParcelOver = useCallback((e: LeafletMouseEvent, feature: Feature): void => {
         e.target.setStyle(ParcelStyles.hover);
-        const props = feature.properties || {};
 
+        let props;
+        let hoveredParcel;
         const matchingOwner = findMatchingOwner(feature);
 
         if (matchingOwner) {
-            let parcelObj = mode === "detailed"
-                ? { ...props }
-                : {
+            if (mode === "detailed") {
+                props = feature.properties as ParcelDetailed;
+                hoveredParcel = { ...props };
+            } else {
+                props = feature.properties as ParcelBasic;
+                hoveredParcel = {
                     ...props,
                     ownerName: matchingOwner.ownerName,
                     houseNumber: matchingOwner.houseNumber
                 }
-            setHoveredParcel(parcelObj);
+            }
+            setHoveredParcel(hoveredParcel);
         }
     }, [findMatchingOwner, mode, setHoveredParcel]);
 

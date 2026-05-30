@@ -1,21 +1,8 @@
+import { HoveredParcel } from "@/types";
 import { House, LandPlot } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-interface ParcelInfoBoxProps {
-    activeParcel: {
-        parcel_number?: string | number;
-        owner_uk?: string;
-        owner_pl?: string;
-        ownerName?: string;
-        houseNumber?: string;
-        house_number?: string;
-        land_category?: string;
-        type?: string;
-        parcel_type?: string;
-    } | null;
-}
-
-export default function ParcelInfoBox({ activeParcel }: ParcelInfoBoxProps) {
+export default function ParcelInfoBox({ activeParcel }: { activeParcel: HoveredParcel | null | undefined }) {
     const { t, i18n } = useTranslation();
 
     const Categories = {
@@ -27,7 +14,8 @@ export default function ParcelInfoBox({ activeParcel }: ParcelInfoBoxProps) {
         field: t("landCategories.field"),
         water: t("landCategories.water"),
         orchard: t("landCategories.orchard"),
-        household: t("landCategories.household")
+        household: t("landCategories.household"),
+        forest: t("landCategories.forest")
     } as const;
 
     if (!activeParcel) return null;

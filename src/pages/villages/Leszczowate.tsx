@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import { useState } from "react";
 import { MapConfig } from "@/types/constants";
-import type { Owner, ParcelBasic, ParcelDetailed } from "@/types";
+import type { HoveredParcel, Owner } from "@/types";
 import { useParcelsData } from "@/hooks/useParcelsData";
 import OwnersSidebar from "@/components/Sidebar";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -22,7 +22,7 @@ export default function LeszczowateMap() {
     const { isModalOpen, modalData, handleModalOpen, handleModalClose } = useOwnerModal();
 
     const [selectedOwner, setSelectedOwner] = useState<Owner | null>(null);
-    const [hoveredParcel, setHoveredParcel] = useState<ParcelBasic | ParcelDetailed | null>(null);
+    const [hoveredParcel, setHoveredParcel] = useState<HoveredParcel | null >(null);
     const { isCollapsed, handleCollapsedChange } = useSidebar();
 
     const { onFeatureStyle, onEachParcel } = useParcelHandlers({

@@ -61,6 +61,9 @@ export const ParcelStyles: Record<string, PathOptions> = {
         fillColor: Colors.Cyan300,
         fillOpacity: 0.15
     },
+    forest: {
+        ...baseParcelStyle
+    },
     selected: {
         ...baseParcelStyle,
         weight: 2.5,
@@ -120,5 +123,6 @@ export const LangCategories: Record<string, LandCategory> = {
     Field: "field",
     Pasture: "pasture",
     CommonPasture: "common_pasture",
-    Water: "water"
+    Water: "water",
+    Forest: "forest"
 } as const;

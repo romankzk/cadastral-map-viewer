@@ -9,7 +9,7 @@ import type { MapConfig } from "../types/constants";
 import ParcelInfoBox from "./map/ParcelInfoBox";
 import { GeoJSON } from 'react-leaflet/GeoJSON'
 import type { Feature, FeatureCollection } from "geojson";
-import type { Owner } from "../types";
+import type { HoveredParcel, Owner } from "../types";
 import type { Layer, PathOptions } from "leaflet";
 
 interface LeafletMapProps {
@@ -29,7 +29,7 @@ interface LeafletMapProps {
         onFeatureStyle: (feature: Feature | undefined) => PathOptions,
         selectedOwner: Owner | null
     },
-    activeParcel?: any
+    activeParcel?: HoveredParcel | null
 }
 
 export default function LeafletMap({

@@ -93,6 +93,7 @@
         "field": "rola",
         "water": "rzeka / staw",
         "orchard": "sad",
-        "household": "zagroda"
+        "household": "zagroda",
+        "forest": "las"
     }
 }

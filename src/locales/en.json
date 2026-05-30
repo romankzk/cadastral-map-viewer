@@ -91,6 +91,7 @@
         "field": "field",
         "water": "river / pond",
         "orchard": "orchard",
-        "household": "household"
+        "household": "household",
+        "forest": "fprest"
     }
 }
