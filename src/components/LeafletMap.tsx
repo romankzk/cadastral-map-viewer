@@ -127,7 +127,9 @@ export default function LeafletMap({
                                     data={geojsonLayer.data}
                                     onEachFeature={geojsonLayer.onEachParcel}
                                     style={geojsonLayer.onFeatureStyle}
-                                    key={`${i18n.language}-${geojsonLayer.selectedOwner ? `highlight-${geojsonLayer.selectedOwner.id}` : 'default'}`}
+                                    key={`${i18n.language}-${geojsonLayer.selectedOwner 
+                                        ? `highlight-${geojsonLayer.selectedOwner.id || `${geojsonLayer.selectedOwner.ownerName}-${geojsonLayer.selectedOwner.houseNumber}`}` 
+                                        : 'default'}`}
                                 />
                             </LayersControl.Overlay>
                         )}

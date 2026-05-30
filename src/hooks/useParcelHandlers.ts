@@ -1,5 +1,5 @@
 import type { Feature } from "geojson";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import type { Owner, ParcelDetailed, ParcelBasic, HoveredParcel } from "../types";
 import { useTranslation } from "react-i18next";
 import { ParcelStyles, ParcelTypes } from "../types/constants";
@@ -22,21 +22,30 @@ export function useParcelHandlers({
     setHoveredParcel,
 }: UseParcelHandlersProps) {
     const { i18n } = useTranslation();
+    const ownersRef = useRef<Owner[]>(owners);
+
+    useEffect(() => {
+        ownersRef.current = owners;
+    }, [owners]);
 
     const findMatchingOwner = useCallback((feature: Feature): Owner | false => {
         if (!feature.properties) return false;
 
+        const currentOwners = ownersRef.current;
+
         if (mode === "detailed") {
             const props = feature.properties as ParcelDetailed;
             const houseNum = props.house_number ? parseInt(props.house_number) : 0;
-            const ownerName = i18n.language === 'uk' ? props.owner_uk.trim() : props.owner_pl.trim();
+            const ownerNameUk = (props.owner_uk || '').trim();
+            const ownerNamePl = (props.owner_pl || '').trim();
+            const ownerName = i18n.language === 'uk' ? ownerNameUk : ownerNamePl;
 
-            return owners.find(o => o.ownerName === ownerName && o.houseNumber === houseNum) || false;
+            return currentOwners.find(o => o.ownerName === ownerName && o.houseNumber === houseNum) || false;
         } else {
             const props = feature.properties as ParcelBasic;
             const parcelNum = props.parcel_number ? parseInt(props.parcel_number) : 0;
 
-            return owners.find(o => {
+            return currentOwners.find(o => {
                 if (props.parcel_type === ParcelTypes.Build) {
                     return o.buildParcels?.includes(parcelNum);
                 } else {
@@ -44,14 +53,16 @@ export function useParcelHandlers({
                 }
             }) || false;
         }
-    }, [mode, owners, i18n.language]);
+    }, [mode, i18n.language]);
 
     const isFeatureSelected = useCallback((feature: Feature | undefined): boolean => {
         if (!selectedOwner || !feature?.properties) return false;
 
         if (mode === "detailed") {
             const props = feature.properties as ParcelDetailed;
-            const localizedOwner = i18n.language === 'uk' ? props.owner_uk.trim() : props.owner_pl.trim();
+            const ownerNameUk = (props.owner_uk || '').trim();
+            const ownerNamePl = (props.owner_pl || '').trim();
+            const localizedOwner = i18n.language === 'uk' ? ownerNameUk : ownerNamePl;
             const houseNum = parseInt(props.house_number, 10);
 
             return (
@@ -87,24 +98,22 @@ export function useParcelHandlers({
     const onParcelOver = useCallback((e: LeafletMouseEvent, feature: Feature): void => {
         e.target.setStyle(ParcelStyles.hover);
 
-        let props;
-        let hoveredParcel;
+        let hoveredParcel: HoveredParcel;
         const matchingOwner = findMatchingOwner(feature);
 
-        if (matchingOwner) {
-            if (mode === "detailed") {
-                props = feature.properties as ParcelDetailed;
-                hoveredParcel = { ...props };
-            } else {
-                props = feature.properties as ParcelBasic;
-                hoveredParcel = {
-                    ...props,
-                    ownerName: matchingOwner.ownerName,
-                    houseNumber: matchingOwner.houseNumber
-                }
+        if (mode === "detailed") {
+            const props = feature.properties as ParcelDetailed;
+            hoveredParcel = { ...props };
+        } else {
+            const props = feature.properties as ParcelBasic;
+            hoveredParcel = {
+                ...props,
+                ownerName: matchingOwner ? matchingOwner.ownerName : undefined,
+                houseNumber: matchingOwner ? matchingOwner.houseNumber : undefined
             }
-            setHoveredParcel(hoveredParcel);
         }
+
+        setHoveredParcel(hoveredParcel);
     }, [findMatchingOwner, mode, setHoveredParcel]);
 
     const onParcelOut = useCallback((e: LeafletMouseEvent, feature: Feature) => {
@@ -114,9 +123,9 @@ export function useParcelHandlers({
             return;
         }
 
-        e.target.setStyle(getFeatureStyle(feature.properties?.type
-            ? feature.properties?.type
-            : feature.properties?.land_category));
+        const featureProperties = feature.properties;
+        const featureType = featureProperties?.type || featureProperties?.land_category;
+        e.target.setStyle(getFeatureStyle(featureType));
     }, [isFeatureSelected, setHoveredParcel]);
 
     const onFeatureStyle = useCallback((feature: Feature | undefined) => {
