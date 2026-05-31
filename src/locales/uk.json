@@ -59,8 +59,12 @@
         "locality": "Місцевість",
         "original": "Оригінальний запис",
         "note": "Примітки",
-        "buildParcels": "Будівельних ділянок",
-        "landParcels": "Земельних ділянок"
+        "buildParcelsGen": "Будівельних ділянок",
+        "landParcelsGen": "Земельних ділянок",
+        "buildParcelsNom": "Будівельні ділянки",
+        "landParcelsNom": "Земельні ділянки",
+        "showParcelsBtn": "Показати номери ділянок",
+        "hideParcelsBtn": "Приховати номери ділянок"
     },
 
     "mapControls": {

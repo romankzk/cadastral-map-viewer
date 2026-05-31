@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Owner } from '../types';
-import { X } from 'lucide-react';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
 
 interface OwnerDetailsModalProps {
     isOpen: boolean;
@@ -11,6 +11,8 @@ interface OwnerDetailsModalProps {
 
 export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerDetailsModalProps) {
     const { t } = useTranslation();
+
+    const [isListVisible, setIsListVisible] = useState(false);
 
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -29,6 +31,11 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
         };
     }, [isOpen, onClose]);
 
+    const handleModalClose = () => {
+        setIsListVisible(false);
+        onClose();
+    }
+
     if (!isOpen || !ownerData) return null;
 
     return (
@@ -37,7 +44,7 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
             {/* Backdrop Blur Overlay */}
             <div
                 className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
-                onClick={onClose}
+                onClick={handleModalClose}
             />
 
             {/* Modal Box Container */}
@@ -52,7 +59,7 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
 
                         {/* Close Action Button */}
                         <button
-                            onClick={onClose}
+                            onClick={handleModalClose}
                             className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer"
                             aria-label="Close modal"
                         >
@@ -63,9 +70,9 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
                         {ownerData.ownerName}
                     </h2>
                     {ownerData.ownerStatus && (
-                    <p className="text-sm font-medium text-slate-500">
-                       {ownerData.ownerStatus} 
-                    </p>
+                        <p className="text-sm font-medium text-slate-500">
+                            {ownerData.ownerStatus}
+                        </p>
                     )}
                 </div>
 
@@ -83,14 +90,14 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
                         </div>
                         {/* Owner Origin */}
                         {ownerData.ownerOrigin && (
-                        <div className="flex-1">
-                            <label className="text-xs font-medium text-slate-400 block mb-0.5">
-                                {t("ownerModal.locality")}
-                            </label>
-                            <p className="text-base font-medium text-slate-900">
-                                {ownerData.ownerOrigin}
-                            </p>
-                        </div>
+                            <div className="flex-1">
+                                <label className="text-xs font-medium text-slate-400 block mb-0.5">
+                                    {t("ownerModal.locality")}
+                                </label>
+                                <p className="text-base font-medium text-slate-900">
+                                    {ownerData.ownerOrigin}
+                                </p>
+                            </div>
                         )}
                     </div>
 
@@ -131,7 +138,7 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
                             <div className="flex flex-row">
                                 <div className="flex-1">
                                     <label className="text-xs font-medium text-slate-400 block mb-0.5">
-                                        {t("ownerModal.buildParcels")}
+                                        {t("ownerModal.buildParcelsGen")}
                                     </label>
                                     <p className="text-base font-medium text-slate-800">
                                         {ownerData.buildParcels ? ownerData.buildParcels.length : "-"}
@@ -139,16 +146,67 @@ export default function OwnerDetailsModal({ isOpen, onClose, ownerData }: OwnerD
                                 </div>
                                 <div className="flex-1">
                                     <label className="text-xs font-medium text-slate-400 block mb-0.5">
-                                        {t("ownerModal.landParcels")}
+                                        {t("ownerModal.landParcelsGen")}
                                     </label>
-                                    <p className="text-base font-medium text-slate-800">
+                                    <p className="text-base font-medium text-slate-800 flex items-center gap-2">
                                         {ownerData.landParcels ? ownerData.landParcels.length : "-"}
                                     </p>
                                 </div>
                             </div>
+
+
+                            <>
+                                <hr className="border-slate-100" />
+                                <button
+                                    className="flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-100 rounded-md transition-colors p-2 text-xs text-slate-800"
+                                    onClick={() => setIsListVisible(!isListVisible)}
+                                >
+                                    {isListVisible
+                                        ? (
+                                            <>
+                                                <ChevronUp size={12} />
+                                                {t('ownerModal.hideParcelsBtn')}
+                                            </>
+                                        )
+                                        : (
+                                            <>
+                                                <ChevronDown size={12} />
+                                                {t('ownerModal.showParcelsBtn')}
+                                            </>
+                                        )}
+                                </button>
+                            </>
+
+
+                            {isListVisible && (
+                                <>
+                                    <hr className="border-slate-100" />
+                                    <div className="flex flex-col gap-3 transition-all">
+                                        {ownerData.buildParcels && ownerData.buildParcels.length > 0 && (
+                                            <div className="flex-1">
+                                                <label className="text-xs font-medium text-slate-400 block mb-0.5">
+                                                    {t("ownerModal.buildParcelsNom")}
+                                                </label>
+                                                <p className="text-xs text-slate-800">
+                                                    {ownerData.buildParcels.join(', ')}
+                                                </p>
+                                            </div>
+                                        )}
+                                        {ownerData.landParcels && ownerData.landParcels.length > 0 && (
+                                            <div className="flex-1">
+                                                <label className="text-xs font-medium text-slate-400 block mb-0.5">
+                                                    {t("ownerModal.landParcelsNom")}
+                                                </label>
+                                                <p className="text-xs text-slate-800">
+                                                    {ownerData.landParcels.join(', ')}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </>
+                            )}
                         </>
                     )}
-
                 </div>
             </div>
         </div>

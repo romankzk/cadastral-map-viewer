@@ -57,8 +57,12 @@
         "locality": "Locality",
         "original": "Original Record",
         "note": "Notes",
-        "buildParcels": "Building Parcels",
-        "landParcels": "Land Parcels"
+        "buildParcelsGen": "Building Parcels",
+        "landParcelsGen": "Land Parcels",
+        "buildParcelsNom": "Building Parcels",
+        "landParcelsNom": "Land Parcels",
+        "showParcelsBtn": "Show parcels numbers",
+        "hideParcelsBtn": "Hide parcels numbers"
     },
 
     "mapControls": {

@@ -59,8 +59,12 @@
         "locality": "Miejscowość",
         "original": "Oryginalny rekord",
         "note": "Notatki",
-        "buildParcels": "Działki budowlane",
-        "landParcels": "Działki gruntowe"
+        "buildParcelsGen": "Parcele budowlane",
+        "landParcelsGen": "Parcele gruntowe",
+        "buildParcelsNom": "Parcele budowlane",
+        "landParcelsNom": "Parcele gruntowe",
+        "showParcelsBtn": "Pokaż numery parcel",
+        "hideParcelsBtn": "Ukryj numery parcel"
     },
 
     "mapControls": {
