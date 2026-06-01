@@ -68,7 +68,7 @@ export default function Home() {
                                                     )
                                                 }
                                                 else return (
-                                                    <li><a href={source.link} className="text-blue-500 flex items-center gap-1">
+                                                    <li><a href={source.link} target="_blank" className="text-blue-500 flex items-center gap-1">
                                                         {source.text}
                                                         <SquareArrowOutUpRight size={10} />
                                                     </a></li>)
