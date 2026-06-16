@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from "react";
 import type { Owner, ParcelDetailed, ParcelBasic, HoveredParcel } from "../types";
 import { useTranslation } from "react-i18next";
 import { ParcelStyles, ParcelTypes } from "../types/constants";
-import type { Layer, LeafletMouseEvent } from "leaflet";
+import type { Layer, LeafletMouseEvent, Path } from "leaflet";
 import { getFeatureStyle } from "../utils/style-utils";
 
 interface UseParcelHandlersProps {
@@ -82,11 +82,16 @@ export function useParcelHandlers({
         }
     }, [mode, selectedOwner, i18n.language]);
 
-    const onParcelClick = useCallback((feature: Feature): void => {
+    const onParcelClick = useCallback((feature: Feature, layer: Layer): void => {
         const matchingOwner = findMatchingOwner(feature);
 
         if (matchingOwner) {
             setSelectedOwner(matchingOwner);
+
+            // Bring the clicked parcel to front so borders are fully visible
+            if ('bringToFront' in layer) {
+                (layer as Path).bringToFront();
+            }
 
             const targetButton = document.getElementById(`owner-btn-${matchingOwner.id}`);
             if (targetButton) {
@@ -97,6 +102,11 @@ export function useParcelHandlers({
 
     const onParcelOver = useCallback((e: LeafletMouseEvent, feature: Feature): void => {
         e.target.setStyle(ParcelStyles.hover);
+        
+        // Bring to front on hover as well to see borders clearly
+        if ('bringToFront' in e.target) {
+            (e.target as Path).bringToFront();
+        }
 
         let hoveredParcel: HoveredParcel;
         const matchingOwner = findMatchingOwner(feature);
@@ -120,6 +130,10 @@ export function useParcelHandlers({
         setHoveredParcel(null);
         if (isFeatureSelected(feature)) {
             e.target.setStyle(ParcelStyles.selected);
+            // Ensure selected stays on top after hover out
+            if ('bringToFront' in e.target) {
+                (e.target as Path).bringToFront();
+            }
             return;
         }
 
@@ -141,11 +155,18 @@ export function useParcelHandlers({
 
     const onEachParcel = useCallback((feature: Feature, layer: Layer) => {
         layer.on({
-            click: () => onParcelClick(feature),
+            click: () => onParcelClick(feature, layer),
             mouseover: (e) => onParcelOver(e, feature),
             mouseout: (e) => onParcelOut(e, feature)
         });
-    }, [onParcelClick, onParcelOver, onParcelOut]);
+
+        // If this feature is already selected (e.g. from sidebar or initial load), bring to front
+        if (isFeatureSelected(feature)) {
+            if ('bringToFront' in layer) {
+                (layer as Path).bringToFront();
+            }
+        }
+    }, [onParcelClick, onParcelOver, onParcelOut, isFeatureSelected]);
 
     return { onFeatureStyle, onEachParcel }
 }
