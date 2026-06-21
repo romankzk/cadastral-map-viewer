@@ -3,14 +3,14 @@ import 'leaflet/dist/leaflet.css';
 import { PanelBottomClose, PanelBottomOpen, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import LanguageSwitcher from "./map/LanguageSwitcher";
 import OpacitySlider from "./map/OpacitySlider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { MapConfig } from "../types/constants";
+import { MapConfig, ParcelStyles } from "../types/constants";
 import ParcelInfoBox from "./map/ParcelInfoBox";
 import { GeoJSON } from 'react-leaflet/GeoJSON'
 import type { Feature, FeatureCollection } from "geojson";
 import type { HoveredParcel, Owner } from "../types";
-import type { Layer, PathOptions } from "leaflet";
+import type { Layer, PathOptions, GeoJSON as LeafletGeoJSON, Path } from "leaflet";
 
 interface LeafletMapProps {
     mapConfig: MapConfig
@@ -42,12 +42,31 @@ export default function LeafletMap({
     const { t, i18n } = useTranslation();
     const [opacity, setOpacity] = useState(0.75);
     const [isTileVisible, setIsTileVisible] = useState(true);
+    const geojsonRef = useRef<LeafletGeoJSON>(null);
 
     const handleLayerToggle = (layerName: string, isVisible: boolean) => {
         if (layerName === tileLayer?.name) {
             setIsTileVisible(isVisible);
         }
     };
+
+    // Ensure selected feature is brought to front after render/re-render
+    useEffect(() => {
+        if (geojsonRef.current && geojsonLayer?.selectedOwner) {
+            geojsonRef.current.eachLayer((layer: Layer) => {
+                const featureLayer = layer as Layer & { feature?: Feature };
+                if (featureLayer.feature) {
+                    const style = geojsonLayer.onFeatureStyle(featureLayer.feature);
+                    // Check if the style matches the 'selected' style weight
+                    if (style.weight === ParcelStyles.selected.weight) {
+                        if ('bringToFront' in layer) {
+                            (layer as Path).bringToFront();
+                        }
+                    }
+                }
+            });
+        }
+    }, [geojsonLayer?.selectedOwner, geojsonLayer?.onFeatureStyle]);
 
     return (
         <div className={`relative flex-1 min-w-0 ${sidebarState.isCollapsed ? `h-full` : `h-[50svh]`} md:h-full bg-slate-100 transition-all duration-300`}>
@@ -124,6 +143,7 @@ export default function LeafletMap({
                         {geojsonLayer && geojsonLayer.data && (
                             <LayersControl.Overlay checked name={geojsonLayer.name}>
                                 <GeoJSON
+                                    ref={geojsonRef}
                                     data={geojsonLayer.data}
                                     onEachFeature={geojsonLayer.onEachParcel}
                                     style={geojsonLayer.onFeatureStyle}

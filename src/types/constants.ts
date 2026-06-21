@@ -7,7 +7,15 @@ export const Colors = {
     Amber500: "#f59e0b",
     Blue500: "#3b82f6",
     Cyan300: "#67e8f9",
-    Green300: "#86efac"
+    Green300: "#86efac",
+
+    Green500: "#22c55e", // Garden + Orchard
+    Emerald500: "#10b981", // Pasture
+    Green900: "#14532d", // Forest
+    Blue600: "#2563eb", // Water
+    Amber600: "#d97706", // Field
+    Amber100: "#fef3c7", // Yard
+    Cyan500: "#06b6d4", // Selected
 }
 
 const baseParcelStyle = {
@@ -26,7 +34,7 @@ export const ParcelStyles: Record<string, PathOptions> = {
     },
     yard: {
         ...baseParcelStyle,
-        fillColor: Colors.Red100,
+        fillColor: Colors.Amber100,
         fillOpacity: 0.5
     },
     road: {
@@ -40,20 +48,27 @@ export const ParcelStyles: Record<string, PathOptions> = {
     },
     garden: {
         ...baseParcelStyle,
+        fillColor: Colors.Green500,
         fillOpacity: 0.4
     },
     orchard: {
         ...baseParcelStyle,
+        fillColor: Colors.Green500,
         fillOpacity: 0.4
     },
     pasture: {
         ...baseParcelStyle,
-        fillColor: Colors.Green300,
+        fillColor: Colors.Emerald500,
         fillOpacity: 0.2
     },
     common_pasture: {
         ...baseParcelStyle,
-        fillColor: Colors.Green300,
+        fillColor: Colors.Emerald500,
+        fillOpacity: 0.2
+    },
+    field: {
+        ...baseParcelStyle,
+        fillColor: Colors.Amber600,
         fillOpacity: 0.2
     },
     cemetery: {
@@ -68,7 +83,7 @@ export const ParcelStyles: Record<string, PathOptions> = {
     },
     water: {
         ...baseParcelStyle,
-        fillColor: Colors.Cyan300,
+        fillColor: Colors.Blue600,
         fillOpacity: 0.15
     },
     forest: {
@@ -77,8 +92,9 @@ export const ParcelStyles: Record<string, PathOptions> = {
     selected: {
         ...baseParcelStyle,
         weight: 2.5,
-        fillColor: Colors.Blue500,
-        fillOpacity: 0.5
+        fillColor: Colors.Cyan500,
+        color: Colors.Red500,
+        fillOpacity: 0.8
     },
     hover: {
         weight: 2.5,
